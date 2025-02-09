@@ -34,9 +34,25 @@ import Footer from "../components/Footer.astro";
   }
 
   @font-face {
+    font-family: "Inter";
+    src: url(/fonts/InterFont.ttf);
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
     font-family: "Chillax";
     src: url(/fonts/Chillax-Variable.ttf);
     font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Chillax";
+    src: url(/fonts/Chillax-Variable.ttf);
+    font-weight: bold;
     font-style: normal;
     font-display: swap;
   }
@@ -49,12 +65,26 @@ import Footer from "../components/Footer.astro";
     font-display: swap;
   }
 
+  @font-face {
+    font-family: "Theonory";
+    src: url(/fonts/Theonory-Regular.ttf);
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --font-size-small: 1rem;
     --font-size-medium: 1.618rem;
     --font-size-large: 2.618rem;
     --font-size-xlarge: 4.236rem;
     --font-size-xxlarge: 6.854rem;
+
+    --margin-small: 1rem;
+    --margin-medium: 2rem;
+    --margin-large: 4rem;
+    --margin-xlarge: 8rem;
+    --margin-xxlarge: 16rem;
 
     --color-white: #ffffff;
     --color-black: #0e0b02;

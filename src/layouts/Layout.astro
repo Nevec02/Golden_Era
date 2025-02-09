@@ -24,7 +24,7 @@ import Footer from "../components/Footer.astro";
   </body>
 </html>
 
-<style>
+<style is:global>
   @font-face {
     font-family: "Inter";
     src: url(/fonts/InterFont.ttf);
@@ -60,7 +60,8 @@ import Footer from "../components/Footer.astro";
     --margin-medium: 2rem;
     --margin-large: 4rem;
     --margin-xlarge: 8rem;
-    --margin-xxlarge: 16rem;
+    --margin-xxlarge: 12rem;
+    --margin-xxxlarge: 16rem;
 
     --color-white: #ffffff;
     --color-black: #0e0b02;
@@ -80,13 +81,23 @@ import Footer from "../components/Footer.astro";
 
   ::selection {
     background-color: var(--color-primary-500);
-    color: var(--color-white);
+    color: var(--color-black);
   }
 
   ::-moz-selection {
     background-color: var(--color-primary-500);
     color: var(--color-white);
   }
+  footer ::selection {
+    background-color: var(--color-background);
+    color: var(--color-primary-500);
+  }
+
+  footer ::-moz-selection {
+    background-color: var(--color-background);
+    color: var(--color-primary-500);
+  }
+  
 
   .element {
     cursor: url("/src/assets/logos/goldensun.svg"), auto;

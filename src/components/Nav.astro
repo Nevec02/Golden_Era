@@ -3,22 +3,70 @@ import { Image } from "astro:assets";
 import Logo from "../assets/logos/sideGoldenera.svg";
 ---
 
-<nav>
-  <Image src={Logo} alt="Golden Era Logo" width="150" height="70" />
+<a href="#main" class="skip-link">Ir al contenido principal</a>
+
+<div class="sticky-wrapper">
+  <button
+    id="open-side-nav"
+    aria-label="Abrir menú lateral"
+    aria-expanded="false"
+    aria-controls="navbar"
+    onclick="openSideNav()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="40px"
+      viewBox="0 -960 960 960"
+      width="40px"
+      fill="var(--color-primary-500)"
+      ><path
+        d="M165.13-254.62q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.86q7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.87q-7.22 7.12-17.9 7.12H165.13Zm0-200.25q-10.68 0-17.9-7.27-7.23-7.26-7.23-17.99 0-10.74 7.23-17.87 7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.27 7.23 7.26 7.23 17.99 0 10.74-7.23 17.87-7.22 7.13-17.9 7.13H165.13Zm0-200.26q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.87q7.22-7.12 17.9-7.12h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.86q-7.22 7.13-17.9 7.13H165.13Z"
+      ></path></svg
+    >
+  </button>
+</div>
+
+<nav id="navbar">
+  <div class="close-container">
+    <button
+      id="close-side-nav"
+      aria-label="Cerrar menú lateral"
+      onclick="closeSideNav()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="40px"
+        viewBox="0 -960 960 960"
+        width="40px"
+        fill="var(--color-primary-500)"
+        ><path
+          d="m480-444.62-209.69 209.7q-7.23 7.23-17.5 7.42-10.27.19-17.89-7.42-7.61-7.62-7.61-17.7 0-10.07 7.61-17.69L444.62-480l-209.7-209.69q-7.23-7.23-7.42-17.5-.19-10.27 7.42-17.89 7.62-7.61 17.7-7.61 10.07 0 17.69 7.61L480-515.38l209.69-209.7q7.23-7.23 17.5-7.42 10.27-.19 17.89 7.42 7.61 7.62 7.61 17.7 0 10.07-7.61 17.69L515.38-480l209.7 209.69q7.23 7.23 7.42 17.5.19 10.27-7.42 17.89-7.62 7.61-17.7 7.61-10.07 0-17.69-7.61L480-444.62Z"
+        ></path></svg
+      >
+    </button>
+  </div>
+  <div class="logo-container">
+    <a href="/">
+      <Image src={Logo} alt="Golden Era Logo" width="150" height="60" />
+    </a>
+  </div>
+
   <ul>
     <li><a href="/">Inicio</a></li>
     <li><a href="/servicios">Servicios</a></li>
     <li><a href="/proyectos">Proyectos</a></li>
-    <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+    <li><a href="/sobre-nosotros">Sobre nosotros</a></li>
     <li><a href="/contacto">Contacto</a></li>
   </ul>
 </nav>
+
+<div id="overlay" onclick="closeSideNav()" aria-hidden="true"></div>
 
 <style>
   nav {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     background-color: transparent;
     color: var(--color-white);
     position: sticky;
@@ -30,16 +78,13 @@ import Logo from "../assets/logos/sideGoldenera.svg";
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  nav li {
-    margin-right: 5rem;
+    gap: 5rem;
   }
   nav a {
     text-decoration: none;
     font-size: var(--font-size-medium);
     color: var(--color-white);
   }
-
   nav li a:hover {
     color: var(--color-primary-500);
     text-decoration: underline;
@@ -53,4 +98,133 @@ import Logo from "../assets/logos/sideGoldenera.svg";
     text-underline-offset: 8px;
     text-decoration-thickness: 2px;
   }
+
+  #open-side-nav {
+    display: none;
+    background: none;
+    border: none;
+    padding: 1rem;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  #close-side-nav {
+    display: none;
+    background: none;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+  }
+
+  #overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    z-index: 9;
+    display: none;
+  }
+
+  .skip-link {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 2rem 2.4rem;
+    z-index: 1000;
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: var(--font-size-large);
+    transition: opacity 0.3s ease-out;
+  }
+
+  .skip-link:focus {
+    opacity: 1;
+    pointer-events: auto;
+    outline: 2px solid var(--color-white);
+  }
+
+  @media (max-width: 768px) {
+    .sticky-wrapper {
+      position: sticky;
+      top: 0.1rem;
+    }
+    #open-side-nav,
+    #close-side-nav {
+      display: block;
+    }
+    .close-container {
+      width: 100%;
+    }
+
+    .logo-container {
+      width: 100%;
+      padding-left: 10rem;
+    }
+    nav {
+      position: fixed;
+      flex-direction: column;
+      justify-content: flex-start;
+      top: 0;
+      right: -100%;
+      height: 100dvh;
+      width: min(15em, 100%);
+      z-index: 10;
+      border-left: 1px solid var(--color-primary-500);
+      gap: 4rem;
+      transition: right 0.3s ease-out;
+    }
+
+    nav.show {
+      right: 0;
+    }
+
+    nav.show ~ #overlay {
+      display: block;
+    }
+
+    nav ul {
+      flex-direction: column;
+      width: 100%;
+      padding-left: 10rem;
+    }
+  }
 </style>
+
+<script is:inline>
+  const navBar = document.getElementById("navbar");
+  const openNav = document.getElementById("openNav");
+
+  const media = window.matchMedia("(width <= 768px)");
+  media.addEventListener("change", (e) => updateNav(e));
+
+  function updateNav(e) {
+    const isMobile = e.matches;
+
+    if (isMobile) {
+      navBar?.setAttribute("inert", "");
+    } else {
+      navBar?.removeAttribute("inert", "");
+    }
+  }
+  function openSideNav() {
+    navBar?.classList.add("show");
+    openNav?.setAttribute("aria-expanded", "true");
+    navBar?.removeAttribute("inert", "");
+  }
+
+  function closeSideNav() {
+    navBar?.classList.remove("show");
+    openNav?.setAttribute("aria-expanded", "false");
+    navBar?.setAttribute("inert", "");
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeSideNav();
+    }
+  });
+
+  updateNav(media);
+</script>

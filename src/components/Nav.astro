@@ -1,7 +1,56 @@
+---
+import { Image } from "astro:assets";
+import Logo from "../assets/logos/sideGoldenera.svg";
+---
+
 <nav>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
+  <Image src={Logo} alt="Golden Era Logo" width="150" height="70" />
+  <ul>
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/servicios">Servicios</a></li>
+    <li><a href="/proyectos">Proyectos</a></li>
+    <li><a href="/sobre-nosotros">Sobre Nosotros</a></li>
+    <li><a href="/contacto">Contacto</a></li>
+  </ul>
 </nav>
+
+<style>
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: transparent;
+    color: var(--color-white);
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(8px);
+  }
+  nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav li {
+    margin-right: 5rem;
+  }
+  nav a {
+    text-decoration: none;
+    font-size: var(--font-size-medium);
+    color: var(--color-white);
+  }
+
+  nav li a:hover {
+    color: var(--color-primary-500);
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
+    cursor: pointer;
+  }
+  nav li a:focus {
+    color: var(--color-primary-500);
+    text-decoration: underline;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2px;
+  }
+</style>

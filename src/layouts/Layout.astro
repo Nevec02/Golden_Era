@@ -33,16 +33,32 @@ import Footer from "../components/Footer.astro";
     font-display: swap;
   }
 
+  @font-face {
+    font-family: "Chillax";
+    src: url(/fonts/Chillax-Variable.ttf);
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Theonory";
+    src: url(/fonts/Theonory-Regular.ttf);
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     --font-size-small: 1rem;
-	--font-size-medium: 1.618rem;
-	--font-size-large: 2.618rem;
-	--font-size-xlarge: 4.236rem;
-	--font-size-xxlarge: 6.854rem;
+    --font-size-medium: 1.618rem;
+    --font-size-large: 2.618rem;
+    --font-size-xlarge: 4.236rem;
+    --font-size-xxlarge: 6.854rem;
 
     --color-white: #ffffff;
     --color-black: #0e0b02;
-	--color-background: #0e0b02;
+    --color-background: #0e0b02;
 
     --color-primary-50: #faf1da;
     --color-primary-100: #f5e3b6;
@@ -77,8 +93,8 @@ import Footer from "../components/Footer.astro";
     font-family: "Inter", "Segoe UI", sans-serif;
     margin: 0;
     min-height: 100dvh;
-	background-color: var(--color-background);
-	color: var(--color-white);
+    background-color: var(--color-background);
+    color: var(--color-white);
   }
 
   h1,

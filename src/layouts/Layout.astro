@@ -28,15 +28,7 @@ import Footer from "../components/Footer.astro";
   @font-face {
     font-family: "Inter";
     src: url(/fonts/InterFont.ttf);
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Inter";
-    src: url(/fonts/InterFont.ttf);
-    font-weight: bold;
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
   }
@@ -44,15 +36,7 @@ import Footer from "../components/Footer.astro";
   @font-face {
     font-family: "Chillax";
     src: url(/fonts/Chillax-Variable.ttf);
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Chillax";
-    src: url(/fonts/Chillax-Variable.ttf);
-    font-weight: bold;
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
   }
@@ -60,15 +44,7 @@ import Footer from "../components/Footer.astro";
   @font-face {
     font-family: "Theonory";
     src: url(/fonts/Theonory-Regular.ttf);
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Theonory";
-    src: url(/fonts/Theonory-Regular.ttf);
-    font-weight: bold;
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
   }
@@ -100,6 +76,20 @@ import Footer from "../components/Footer.astro";
     --color-primary-700: #977215;
     --color-primary-800: #725610;
     --color-primary-900: #4c390b;
+  }
+
+  ::selection {
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+  }
+
+  ::-moz-selection {
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+  }
+
+  .element {
+    cursor: url("/src/assets/logos/goldensun.svg"), auto;
   }
 
   .page-wrapper {

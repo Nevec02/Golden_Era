@@ -1,13 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import FooterLogo from "../assets/logos/sideblack.svg";
+
+import Button from "../components/atoms/Button.astro";
 ---
 
 <footer>
   <div class="footer-container">
     <div class="footer-head">
       <h2>DISEÑO Y PRODUCCIÓN AUDIOVISUAL</h2>
-      <p>Lorem ipsum dolor sit amet.</p>
+      <Button href="/contacto" type="button black" text="Contacta" />
     </div>
     <hr />
     <div class="footer-body">
@@ -56,7 +58,7 @@ import FooterLogo from "../assets/logos/sideblack.svg";
   footer h2 {
     color: var(--color-black);
     font-size: var(--font-size-large);
-    width: 20ch;
+    max-width: 20ch;
     margin: 0;
   }
 
@@ -125,5 +127,19 @@ import FooterLogo from "../assets/logos/sideblack.svg";
     justify-content: center;
     align-items: center;
     margin-bottom: var(--margin-large);
+  }
+
+  @media (max-width: 768px) {
+      .footer-head{
+          flex-direction: column;
+          align-items: start;
+          gap: 2rem;
+      }
+
+      .footer-body{
+          flex-direction: column;
+          gap: 2rem;
+          margin-bottom: var(--margin-large);
+      }
   }
 </style>

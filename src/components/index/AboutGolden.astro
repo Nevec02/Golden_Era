@@ -1,0 +1,180 @@
+---
+import Button from "../atoms/Button.astro";
+---
+
+<section>
+  <div class="about-golden">
+    <div class="marquee">
+      <div>
+        <p class="marquee-item">What is Golden Era?</p>
+        <p class="marquee-item">What is Golden Era?</p>
+        <p class="marquee-item">What is Golden Era?</p>
+      </div>
+      <div aria-hidden="true">
+        <p class="marquee-item">What is Golden Era?</p>
+        <p class="marquee-item">What is Golden Era?</p>
+        <p class="marquee-item">What is Golden Era?</p>
+      </div>
+    </div>
+    <div class="about-era">
+      <hr class="about-hr" />
+      <div class="about-content">
+        <p>
+          En Golden Era se han realizado proyectos innovadores que responden a
+          las necesidades de nuestros clientes y a los deseos de su audiencia.
+        </p>
+        <p>
+          Nos gusta decir que convertimos lo salvaje, ambicioso y experimental
+          en realidad, pero puedes ser tú quien lo juzgue. Generamos engagement,
+          comprensión y acción en cada experiencia que creamos.
+        </p>
+        <Button href="/contacto" text="Contacta" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-golden {
+    position: relative;
+    height: 85rem;
+  }
+  .about-era {
+    position: absolute;
+    top: 30rem;
+    display: flex;
+    justify-content: end;
+    gap: 4rem;
+    width: 100%;
+  }
+  .about-hr {
+    width: 15rem;
+    height: 0;
+    margin: 1.5rem 0 0 0;
+    border: 1px solid var(--color-primary-500);
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    padding-right: clamp(2.5rem, 10%, 10rem);
+    gap: 2rem;
+    width: 30%;
+  }
+
+  .about-content p {
+    margin: 0;
+    font-size: var(--font-size-large);
+    color: var(--color-white);
+    line-height: 4rem;
+  }
+
+  .marquee {
+    overflow: clip;
+    user-select: none;
+    --gap: 80px;
+    display: flex;
+    gap: var(--gap);
+  }
+  .marquee div {
+    flex-shrink: 0;
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+
+    animation: scroll 60s linear infinite;
+  }
+
+  .marquee div p {
+    font-size: clamp(15rem, 20vw, 50rem);
+
+    text-transform: uppercase;
+    letter-spacing: -1rem;
+    font-family: "NewTitle";
+    color: var(--color-primary-500);
+    filter: opacity(0.2);
+    margin: 0;
+  }
+
+  /*  .marquee:hover div {
+    animation-play-state: paused;
+  } */
+
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+
+  @media (max-width: 1800px) {
+    .about-era {
+      top: 25rem;
+    }
+  }
+
+  @media (max-width: 1500px) {
+    .about-era {
+      top: 20rem;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .about-era {
+      justify-content: flex-start;
+      top: 10rem;
+    }
+
+    .about-hr {
+      margin-left: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .about-content {
+      width: 100%;
+      padding-right: 1rem;
+    }
+
+    .about-content p{
+        width: 80%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-golden {
+      height: 45rem;
+    }
+
+    .about-era {
+      top: 10rem;
+      gap: 2rem;
+    }
+    .about-hr {
+      margin-left: 1rem;
+      width: 10rem;
+      margin-top: 1rem;
+    }
+
+    .about-content p {
+      font-size: var(--font-size-medium);
+      line-height: normal;
+    }
+
+    .marquee div p {
+      letter-spacing: normal;
+    }
+  }
+
+  @media (max-width: 600px) {
+
+    .about-hr {
+      margin-left: 0.5rem;
+      width: 5rem;
+    }
+
+    .marquee div {
+      animation: scroll 30s linear infinite;
+    }
+  }
+</style>

@@ -47,7 +47,13 @@ import Logo from "../assets/logos/sideGoldenera.svg";
   </div>
   <div class="logo-container">
     <a href="/">
-      <Image src={Logo} alt="Golden Era Logo" width="150" height="60" loading={"eager"} />
+      <Image
+        src={Logo}
+        alt="Golden Era Logo"
+        width="150"
+        height="60"
+        loading={"eager"}
+      />
     </a>
   </div>
 
@@ -65,17 +71,18 @@ import Logo from "../assets/logos/sideGoldenera.svg";
 <style>
   nav {
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: space-evenly;
     background-color: transparent;
-    color: var(--color-white);
-    position: sticky;
-    top: 0;
     backdrop-filter: blur(8px);
+    color: var(--color-white);
+    position: fixed;
+    top: 0;
     height: fit-content;
   }
 
-  .logo-container{
+  .logo-container {
     width: 25%;
   }
   nav ul {
@@ -152,8 +159,11 @@ import Logo from "../assets/logos/sideGoldenera.svg";
 
   @media (max-width: 768px) {
     .sticky-wrapper {
-      position: sticky;
-      top: 0.1rem;
+      position: fixed;
+      width: 100%;
+      top: 0rem;
+      background-color: transparent;
+      backdrop-filter: blur(8px);
     }
     #open-side-nav,
     #close-side-nav {

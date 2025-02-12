@@ -1,0 +1,114 @@
+---
+import Button from "../atoms/Button.astro";
+---
+
+<section>
+  <div class="team-with-us">
+    <h2>Juntos, hacemos posible lo imposible.</h2>
+    <div class="main-container">
+      <article>
+        <h3 class="title">
+          Como tu aliado <span class="word">estratégico</span>
+        </h3>
+        <hr class="divider" />
+        <p class="text">
+          Nos enfocamos en entender tu visión para crear soluciones de
+          comunicación visual que no solo impacten, sino que se alineen con tus
+          objetivos de negocio. Ya sea para publicidad en pantallas LED, videos
+          corporativos o contenido artístico, trabajamos para que cada mensaje
+          se entregue de forma eficaz y memorable.
+        </p>
+      </article>
+      <article>
+        <h3 class="title">
+          Como tu aliado <span class="word">creativo</span>
+        </h3>
+        <hr class="divider" />
+        <p class="text">
+          Transformamos tu mensaje en experiencias visuales únicas. Creamos
+          conceptos innovadores para pantallas LED y videos corporativos, y
+          llevamos la creatividad un paso más allá, creando contenido para
+          artistas y proyectos con una visión auténtica y sin restricciones.
+        </p>
+      </article>
+      <article>
+        <h3 class="title">
+          Como tu aliado <span class="word">productor</span>
+        </h3>
+        <hr class="divider" />
+        <p class="text">
+          La ejecución es clave. Desde la grabación hasta la postproducción,
+          garantizamos una calidad de producción excepcional en cada proyecto.
+          Nos encargamos de hacer realidad tu visión, ya sea en un video
+          corporativo o en una obra artística, con la perfección técnica que tu
+          marca merece.
+        </p>
+      </article>
+    </div>
+    <Button href="/servicios" text="Conoce los servicios" />
+  </div>
+</section>
+
+<style>
+  .team-with-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    padding: 0 5rem;
+  }
+  .team-with-us h2 {
+    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-bigger));
+    color: var(--color-primary-500);
+    margin: 0 0 var(--margin-large) 0;
+    padding: 0;
+  }
+  .main-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+  }
+  article {
+    width: 90%;
+  }
+  .divider {
+    border: 1px solid var(--color-primary-500);
+    filter: brightness(0.5);
+  }
+  article h3 {
+    font-size: var(--font-size-xlarge);
+    font-weight: normal;
+    margin: 0 0 var(--margin-medium) 0;
+    padding: 0;
+  }
+  .word {
+    display: block;
+  }
+  article p {
+    font-size: var(--font-size-medium);
+    filter: brightness(0.8);
+    width: 80%;
+    margin: 0;
+    padding: 0;
+    line-height: 3rem;
+  }
+
+  @media (max-width: 900px) {
+    .team-with-us {
+      padding: 0 2.5rem;
+    }
+    .main-container {
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    article {
+      width: 95%;
+    }
+
+    article p{
+      width: 90%;
+    }
+  }
+</style>

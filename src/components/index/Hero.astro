@@ -1,16 +1,73 @@
+---
+import { Image } from 'astro:assets'
+import Logo from '../../assets/logos/goldenera.svg'
+---
 <section>
-	<div class="hero">
-		<div class="hero-video">
-			<video autoplay muted loop playsinline>
-				<source src="/videos/GoldenBackgroundSlow.mp4" type="video/mp4" />
-			</video>
-		</div>
-		<div class="hero-content">
-			<h1>Creando obras que inspiran, emocionan y trascienden.</h1>
-		</div>
-	</div>
+  <div class="hero">
+	<div class="hero-gradient" aria-hidden="true"></div>
+    <div class="hero-video">
+      <video autoplay muted loop playsinline>
+        <source src="/videos/GoldenBackgroundSlow.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-content">
+      <Image src={Logo} alt="Golden Era Logo" width="1800" height="600" loading={'eager'} />
+    </div>
+  </div>
 </section>
 
 <style>
-	
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+	z-index: -1;
+  }
+
+  .hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(148, 113, 25, 0) 20%,
+      rgba(224, 170, 35, 0) 100%
+    );
+    z-index: -1;
+  }
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-content {
+    z-index: 1;
+	display: flex;
+	padding: 0 2rem 15rem 2rem;
+  }
+
+
+  @media (max-width: 768px) {
+    .hero-content {
+      width: 100%;
+      text-align: center;
+    }
+  }
 </style>

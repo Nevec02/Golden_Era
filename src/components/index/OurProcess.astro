@@ -1,0 +1,140 @@
+<section>
+  <div class="process-title">
+    <h2>Te contamos nuestro proceso</h2>
+  </div>
+  <div class="main-container">
+    <article class="process p1">
+      <div class="process-container">
+        <div class="left">
+          <h3 class="process-title">Concepto & Estrategia</h3>
+          <p class="process-text">
+            Cada proyecto comienza con una idea. Nos sumergimos en la visión de
+            nuestros clientes para definir un concepto sólido, alineado con sus
+            objetivos y el impacto que desean generar. Exploramos referencias,
+            diseñamos la narrativa y establecemos la estrategia creativa para
+            asegurarnos de que cada pieza tenga una identidad única y poderosa.
+          </p>
+        </div>
+        <div class="right">
+          <div class="image-container">
+            <img src="https://picsum.photos/1920/1080" alt="" />
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="process p2">
+      <div class="process-container">
+        <div class="left">
+          <h3 class="process-title">Producción & Creación</h3>
+          <p class="process-text">
+            Transformamos la idea en imágenes. Desde la filmación hasta la
+            dirección de arte, capturamos cada detalle con precisión. Trabajamos
+            con la mejor calidad en grabación y animación para dar vida a
+            historias que cautivan. Durante esta fase, mantenemos una
+            comunicación constante con nuestros clientes, asegurando que cada
+            avance se alinee con su visión y expectativas. Creemos en la
+            colaboración activa para que el resultado final supere cualquier
+            idea inicial.
+          </p>
+        </div>
+        <div class="right">
+          <div class="image-container">
+            <img src="https://picsum.photos/1920/1080" alt="" />
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="process p3">
+      <div class="process-container">
+        <div class="left">
+          <h3 class="process-title">Edición & Finalización</h3>
+          <p class="process-text">
+            La magia está en los detalles. En la postproducción, refinamos la
+            imagen, añadimos efectos visuales y ajustamos cada elemento para
+            lograr un resultado impecable. El proceso de postproducción es un
+            trabajo en equipo: compartimos avances regularmente, recogemos
+            feedback y refinamos cada detalle junto a nuestros clientes para
+            garantizar que el resultado final sea perfecto y fiel a la visión
+            del proyecto.
+          </p>
+        </div>
+        <div class="right">
+          <div class="image-container">
+            <img src="https://picsum.photos/1920/1080" alt="" />
+          </div>
+        </div>
+      </div>
+    </article>
+    <article class="process p4">
+      <div class="process-container">
+        <div class="left">
+          <h3 class="process-title">Un proceso colaborativo en todo momento</h3>
+          <p class="process-text">
+            Desde el primer boceto hasta la entrega final, mantenemos un flujo
+            de comunicación abierto. Compartimos avances, recogemos feedback y
+            trabajamos en conjunto para que cada pieza refleje exactamente lo
+            que imaginaste. Creemos que la mejor manera de lograr resultados
+            excepcionales es construyéndolos juntos.
+          </p>
+        </div>
+        <div class="right">
+          <div class="image-container">
+            <img src="https://picsum.photos/1920/1080" alt="" />
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  /* section
+        .process-title
+        .main-container
+          .process
+              .process-container
+              .left
+                  .process-title
+                  .process-text
+              .right
+                  .image-container
+    */
+
+    .main-container{
+        width: 100%;
+        overflow: clip;
+    }
+  .process-title h2 {
+    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-larger));
+    color: var(--color-primary-500);
+    margin: 0 0 var(--margin-xxlarge) 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .process {
+    display: flex;
+  }
+
+  .process-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1%;
+    margin-bottom: var(--margin-xlarge);
+  }
+
+  .left, .right{
+    width: 45%;
+  }
+
+  .process:nth-child(odd) .left {
+  background-color: var(--color-primary-500);
+  border-radius: var(--border-radius);
+}
+
+  img{
+    width: 100%;
+    aspect-ratio: 16/16;
+  }
+</style>

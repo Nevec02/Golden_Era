@@ -10,10 +10,8 @@
             <h3 class="process-title">Concepto & Estrategia</h3>
             <p class="process-text">
               Cada proyecto comienza con una idea. Nos sumergimos en la visión
-              de nuestros clientes para definir un concepto sólido, alineado con
-              sus objetivos y el impacto que desean generar. Exploramos
-              referencias, diseñamos la narrativa y establecemos la estrategia
-              creativa para asegurarnos de que cada pieza tenga una identidad
+              del cliente para definir un concepto sólido, explorar referencias
+              y establecer la estrategia creativa que dará forma a una pieza
               única y poderosa.
             </p>
             <div class="list">
@@ -40,22 +38,17 @@
           <div class="text">
             <h3 class="process-title">Producción & Creación</h3>
             <p class="process-text">
-              Transformamos la idea en imágenes. Desde la filmación hasta la
-              dirección de arte, capturamos cada detalle con precisión.
-              Trabajamos con la mejor calidad en grabación y animación para dar
-              vida a historias que cautivan. Durante esta fase, mantenemos una
-              comunicación constante con nuestros clientes, asegurando que cada
-              avance se alinee con su visión y expectativas. Creemos en la
-              colaboración activa para que el resultado final supere cualquier
-              idea inicial.
+              Transformamos la idea en imágenes, cuidando cada detalle desde la
+              filmación hasta la dirección de arte. Mantenemos una comunicación
+              constante con el cliente para asegurar que todo avance en la
+              dirección correcta.
             </p>
             <div class="list">
               <ul>
-                <li>+ Diseño de protagonista</li>
-                <li>+ Narrativa</li>
-                <li>+ Estrategia creativa</li>
-                <li>+ Visión de mercado</li>
-                <li>+ Estrategia de marketing</li>
+                <li>+ Filmación y dirección de arte</li>
+                <li>+ Animación y diseño visual</li>
+                <li>+ Supervisión creativa</li>
+                <li>+ Revisión constante</li>
               </ul>
             </div>
           </div>
@@ -73,21 +66,17 @@
           <div class="text">
             <h3 class="process-title">Edición & Finalización</h3>
             <p class="process-text">
-              La magia está en los detalles. En la postproducción, refinamos la
-              imagen, añadimos efectos visuales y ajustamos cada elemento para
-              lograr un resultado impecable. El proceso de postproducción es un
-              trabajo en equipo: compartimos avances regularmente, recogemos
-              feedback y refinamos cada detalle junto a nuestros clientes para
-              garantizar que el resultado final sea perfecto y fiel a la visión
-              del proyecto.
+              En la postproducción, refinamos la imagen, añadimos efectos y
+              optimizamos el contenido para lograr un resultado impecable.
+              Ajustamos cada detalle en colaboración con el cliente hasta
+              alcanzar la versión final perfecta.
             </p>
             <div class="list">
               <ul>
-                <li>+ Diseño de protagonista</li>
-                <li>+ Narrativa</li>
-                <li>+ Estrategia creativa</li>
-                <li>+ Visión de mercado</li>
-                <li>+ Estrategia de marketing</li>
+                <li>+ Montaje y postproducción</li>
+                <li>+ Corrección de color</li>
+                <li>+ Optimización para distintos formatos</li>
+                <li>+ Feedback y ajustes finales</li>
               </ul>
             </div>
           </div>
@@ -103,23 +92,17 @@
       <div class="process-container">
         <div class="left">
           <div class="text">
-            <h3 class="process-title">
-              Un proceso colaborativo en todo momento
-            </h3>
+            <h3 class="process-title">Un proceso colaborativo</h3>
             <p class="process-text">
-              Desde el primer boceto hasta la entrega final, mantenemos un flujo
-              de comunicación abierto. Compartimos avances, recogemos feedback y
-              trabajamos en conjunto para que cada pieza refleje exactamente lo
-              que imaginaste. Creemos que la mejor manera de lograr resultados
-              excepcionales es construyéndolos juntos.
+              Desde el primer boceto hasta la entrega final, trabajamos en
+              conjunto con nuestros clientes, compartiendo avances y recogiendo
+              feedback para garantizar que el resultado supere sus expectativas.
             </p>
             <div class="list">
               <ul>
-                <li>+ Diseño de protagonista</li>
-                <li>+ Narrativa</li>
-                <li>+ Estrategia creativa</li>
-                <li>+ Visión de mercado</li>
-                <li>+ Estrategia de marketing</li>
+                <li>+ Comunicación abierta</li>
+                <li>+ Revisión constante</li>
+                <li>+ Ajustes según feedback</li>
               </ul>
             </div>
           </div>
@@ -187,14 +170,14 @@
     color: var(--color-white);
   }
 
-  .image-container{
+  .image-container {
     width: 100%;
     height: 100%;
   }
 
   img {
     width: 100%;
-    height: auto;
+    height: 100%;
     aspect-ratio: 15/16;
     border-radius: var(--border-radius);
     object-fit: cover;
@@ -223,22 +206,50 @@
   }
 
   .list {
-    width: 80%;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     margin-top: var(--margin-xlarge);
+    margin-bottom: var(--margin-xxlarge);
   }
   .list ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .list li{
+    font-size: var(--font-size-large);
+    line-height: 3.5rem;
+  }
+
+  @media (max-width: 1200px) {
+      .text h3{
+        padding: calc(1rem + 1vw) 0 0 0;
+      }
   }
 
   @media (max-width: 900px) {
-      .process-container{
-          flex-direction: column;
+
+    .text h3{
+        padding: calc(1rem + 5vw) 0 0 0;
       }
 
-      .left, .right{
-          width: 100%;
+      .text p{
+        font-size: var(--font-size-medium);
+        line-height: 3rem;
       }
+
+      .list li{
+        font-size: var(--font-size-medium);
+        line-height: 3rem;
+      }
+    .process-container {
+      flex-direction: column;
+    }
+
+    .left,
+    .right {
+      width: 100%;
+    }
   }
 </style>

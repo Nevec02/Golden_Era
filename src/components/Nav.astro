@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "../assets/logos/sideGoldenera.svg";
+import BlackLogo from "../assets/logos/sideblack.svg";
 ---
 
 <a href="#main" class="skip-link">Ir al contenido principal</a>
@@ -14,6 +15,7 @@ import Logo from "../assets/logos/sideGoldenera.svg";
     onclick="openSideNav()"
   >
     <svg
+      id="open-nav-icon"
       xmlns="http://www.w3.org/2000/svg"
       height="40px"
       viewBox="0 -960 960 960"
@@ -34,6 +36,7 @@ import Logo from "../assets/logos/sideGoldenera.svg";
       onclick="closeSideNav()"
     >
       <svg
+        id="close-nav-icon"
         xmlns="http://www.w3.org/2000/svg"
         height="40px"
         viewBox="0 -960 960 960"
@@ -48,11 +51,21 @@ import Logo from "../assets/logos/sideGoldenera.svg";
   <div class="logo-container">
     <a href="/">
       <Image
+        id={"gold-logo"}
         src={Logo}
         alt="Golden Era Logo"
         width="150"
         height="60"
         loading={"eager"}
+      />
+      <Image
+        id={"black-logo"}
+        src={BlackLogo}
+        alt="Golden Era Logo"
+        width="150"
+        height="60"
+        loading={"eager"}
+        class={"hidden"}
       />
     </a>
   </div>
@@ -69,6 +82,11 @@ import Logo from "../assets/logos/sideGoldenera.svg";
 <div id="overlay" onclick="closeSideNav()" aria-hidden="true"></div>
 
 <style>
+
+  .hidden{
+    display: none;
+  }
+
   nav {
     display: flex;
     width: 100%;
@@ -119,6 +137,10 @@ import Logo from "../assets/logos/sideGoldenera.svg";
     padding: 1rem;
     margin-left: auto;
     cursor: pointer;
+  }
+
+  path {
+    transition: fill 0.3s ease;
   }
 
   #close-side-nav {
@@ -244,4 +266,43 @@ import Logo from "../assets/logos/sideGoldenera.svg";
   });
 
   updateNav(media);
+
+  document.addEventListener("scroll", function () {
+    const icono = document.getElementById("open-nav-icon");
+    const section = document.getElementById("footer");
+    const rect = section.getBoundingClientRect();
+
+    const sectionHeight = rect.height;
+    const sectionMid = rect.top + sectionHeight * 0.75;
+
+    if (sectionMid <= window.innerHeight && sectionMid >= 0) {
+      icono.querySelector("path").setAttribute("fill", "var(--color-black)");
+    } else {
+      icono
+        .querySelector("path")
+        .setAttribute("fill", "var(--color-primary-500)");
+    }
+  });
+
+  /* document.addEventListener("scroll", function () {
+    const originalLogo = document.getElementById("gold-logo");
+    const blackLogo = document.getElementById("black-logo");
+    const section = document.getElementById("footer");
+    const rect = section.getBoundingClientRect();
+
+    const sectionHeight = rect.height;
+    const sectionMid = rect.top + sectionHeight * 0.75;
+
+    if (window.innerWidth > 800) {
+      if (sectionMid <= window.innerHeight && sectionMid >= 0) {
+
+        originalLogo.classList.add("hidden");
+        blackLogo.classList.remove("hidden");
+      } else {
+
+        originalLogo.classList.remove("hidden");
+        blackLogo.classList.add("hidden");
+      }
+    }
+  }); */
 </script>

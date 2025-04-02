@@ -251,7 +251,7 @@ import ScrollTrigger from "gsap/src/ScrollTrigger";
 
   gsap.utils.toArray(".steps").forEach((step, i) => {
     ScrollTrigger.create({
-      trigger: step,
+      trigger: step as HTMLElement,
       start: "top top",
       end: "+=100%",
       pin: true,

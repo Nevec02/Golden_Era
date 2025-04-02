@@ -1,0 +1,57 @@
+---
+import Button from "../atoms/Button.astro";
+---
+
+<section>
+  <div class="work-now">
+    <h2>Contacta con nosotros</h2>
+    <p>
+      ¿Tienes una idea para una nueva experiencia? ¿Quieres colaborar con
+      nosotros? ¿Quieres conocer más sobre nuestro trabajo? ¡Nos encantaría
+      escuchar tus ideas!
+    </p>
+    <Button href="/contactenos" text="Contáctanos" />
+  </div>
+</section>
+
+<style>
+
+  .work-now {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    padding: 0 5rem;
+  }
+  .work-now h2 {
+    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-bigger));
+    color: var(--color-primary-500);
+    margin: 0 0 var(--margin-large) 0;
+    padding: 0;
+  }
+  .work-now p {
+    font-size: var(--font-size-xlarge);
+    color: var(--color-white);
+    width: 80%;
+    margin: 0;
+    padding: 0;
+    line-height: 5.5rem;
+  }
+
+  @media (max-width: 900px) {
+    .work-now {
+      padding: 0 0 0 1.5rem;
+    }
+    .work-now p {
+      width: 95%;
+    }
+  }
+
+  @media (max-width: 465px) {
+    .work-now p {
+        font-size: var(--font-size-medium);
+    }
+      
+  }
+</style>

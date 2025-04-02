@@ -2,7 +2,100 @@
   <div class="process-title">
     <h2>Te contamos nuestro proceso</h2>
   </div>
-  <div class="main-container"></div>
+  <div class="main-container">
+    <div id="step1" class="steps">
+      <div class="left">
+        <h3>Concepto & Estrategia</h3>
+        <p>
+          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
+          cliente para definir un concepto sólido, explorar referencias y
+          establecer la estrategia creativa que dará forma a una pieza única y
+          poderosa.
+        </p>
+        <div class="list">
+          <ul>
+            <li>+ Diseño de protagonista</li>
+            <li>+ Narrativa</li>
+            <li>+ Estrategia creativa</li>
+            <li>+ Visión de mercado</li>
+            <li>+ Estrategia de marketing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <img src="https://picsum.photos/1080" alt="" />
+      </div>
+    </div>
+    <div id="step2" class="steps">
+      <div class="left">
+        <h3>Concepto & Estrategia</h3>
+        <p>
+          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
+          cliente para definir un concepto sólido, explorar referencias y
+          establecer la estrategia creativa que dará forma a una pieza única y
+          poderosa.
+        </p>
+        <div class="list">
+          <ul>
+            <li>+ Diseño de protagonista</li>
+            <li>+ Narrativa</li>
+            <li>+ Estrategia creativa</li>
+            <li>+ Visión de mercado</li>
+            <li>+ Estrategia de marketing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <img src="https://picsum.photos/1080" alt="" />
+      </div>
+    </div>
+    <div id="step3" class="steps">
+      <div class="left">
+        <h3>Concepto & Estrategia</h3>
+        <p>
+          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
+          cliente para definir un concepto sólido, explorar referencias y
+          establecer la estrategia creativa que dará forma a una pieza única y
+          poderosa.
+        </p>
+        <div class="list">
+          <ul>
+            <li>+ Diseño de protagonista</li>
+            <li>+ Narrativa</li>
+            <li>+ Estrategia creativa</li>
+            <li>+ Visión de mercado</li>
+            <li>+ Estrategia de marketing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <img src="https://picsum.photos/1080" alt="" />
+      </div>
+    </div>
+    <div id="step4" class="steps">
+      <div class="left">
+        <h3>Concepto & Estrategia</h3>
+        <p>
+          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
+          cliente para definir un concepto sólido, explorar referencias y
+          establecer la estrategia creativa que dará forma a una pieza única y
+          poderosa.
+        </p>
+        <div class="list">
+          <ul>
+            <li>+ Diseño de protagonista</li>
+            <li>+ Narrativa</li>
+            <li>+ Estrategia creativa</li>
+            <li>+ Visión de mercado</li>
+            <li>+ Estrategia de marketing</li>
+          </ul>
+        </div>
+      </div>
+      <div class="right">
+        <img src="https://picsum.photos/1080" alt="" />
+      </div>
+    </div>
+  </div>
 </section>
 
 <style>
@@ -10,11 +103,80 @@
     width: 100%;
     overflow: clip;
   }
+
   .process-title h2 {
     font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-larger));
     color: var(--color-primary-500);
     margin: 0 0 var(--margin-xxlarge) 0;
     padding: 0;
     text-align: center;
+  }
+
+  #step1,
+  #step3 {
+    background-color: var(--color-primary-500);
+    color: var(--color-black);
+  }
+
+  #step2,
+  #step4 {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .steps {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+  }
+
+  .steps .left {
+    width: 50%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .left h3 {
+    font-size: var(--font-size-xxlarge);
+    font-weight: normal;
+    margin: 0 0 var(--margin-large) 0;
+  }
+
+  .left p {
+    font-size: var(--font-size-large);
+    margin: 0;
+    line-height: 4rem;
+  }
+
+  .list {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    margin-top: var(--margin-xlarge);
+    margin-bottom: var(--margin-xxlarge);
+  }
+
+  .list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .steps .right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: clip;
+  }
+
+  .steps .right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 </style>

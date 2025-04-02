@@ -101,6 +101,7 @@
 <style>
   .main-container {
     width: 100%;
+    height: 500vh; /* Este valor rarete es para que la animación funcione correctamente del pin */
     overflow: clip;
   }
 
@@ -126,7 +127,7 @@
 
   .steps {
     width: 100%;
-    height: 100dvh;
+    height: 100dvh; /* Este valor influye en start y end de animación */
     display: flex;
   }
 
@@ -181,67 +182,80 @@
   }
 
   @media (max-width: 1023px) {
-  .steps {
-    flex-direction: column;
-    min-height: 100vh;
+    .steps {
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .steps .left {
+      width: 100%;
+      min-height: 50vh;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .steps .left h3 {
+      font-size: var(--font-size-xlarge);
+      max-width: 90%;
+    }
+
+    .steps .left p {
+      font-size: var(--font-size-medium);
+      max-width: 90%;
+      line-height: 1.5em;
+      margin: 0;
+    }
+
+    .list {
+      width: 90%;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .steps .right {
+      width: 100%;
+      min-height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .steps .right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
-  .steps .left {
-    width: 100%;
-    min-height: 50vh;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-sizing: border-box;
+  @media (max-width: 425px) {
+    .list {
+      margin-top: 5rem;
+    }
+    .list ul li {
+      font-size: var(--font-size-small);
+    }
   }
-
-  .steps .left h3 {
-    font-size: var(--font-size-xlarge);
-    max-width: 90%;
-  }
-
-  .steps .left p {
-    font-size: var(--font-size-medium);
-    max-width: 90%;
-    line-height: 1.5em;
-    margin: 0;
-  }
-
-  .list {
-    width: 90%;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .steps .right {
-    width: 100%;
-    min-height: 50vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .steps .right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-@media (max-width: 425px) {
-
-  .list{
-    margin-top: 5rem;
-  }
-  .list ul li{
-    font-size: var(--font-size-small);
-  }
-}
-
-
-
 </style>
+
+<script>
+import gsap from "gsap";
+import ScrollTrigger from "gsap/src/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray(".steps").forEach((step, i) => {
+    ScrollTrigger.create({
+      trigger: step,
+      start: "top top",
+      end: "+=100%",
+      pin: true,
+      pinSpacing: false,
+      markers: true,
+  });
+});
+</script>

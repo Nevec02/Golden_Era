@@ -1,0 +1,92 @@
+<section>
+  <div class="hero-gradient" aria-hidden="true"></div>
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="/videos/GoldenBackgroundSlow.webm" type="video/webm" />
+  </video>
+  <div class="hero-container">
+    <div class="lines">
+      <p class="title" id="title1">What</p>
+      <p class="subtitle">Creation</p>
+    </div>
+    <div class="lines">
+      <p class="subtitle">Inspiration</p>
+      <p class="title" id="title2">is</p>
+    </div>
+    <div class="lines">
+      <p class="title" id="title3">Golden</p>
+      <p class="subtitle">Love</p>
+    </div>
+    <div class="lines">
+      <p class="subtitle">Change</p>
+      <p class="title" id="title4">Era?</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90dvh;
+    margin-top: 8rem;
+    overflow: clip;
+  }
+
+  .bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .lines {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-primary-500);
+  }
+
+  p {
+    width: 100%;
+    margin: 0;
+  }
+
+  .title {
+    font-size: 25rem;
+    margin: 0;
+    color: var(--color-primary-500);
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    color: var(--color-white);
+    font-size: 3rem;
+    text-align: center;
+    height: 80%;
+  }
+
+  #title1,
+  #title3 {
+    text-align: left;
+    padding-left: 5rem;
+  }
+
+  #title2,
+  #title4 {
+    text-align: right;
+    padding-right: 5rem;
+  }
+</style>
+
+<script>
+  /* import gsap from "gsap";
+  import ScrollTrigger from "gsap/src/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger); */
+</script>

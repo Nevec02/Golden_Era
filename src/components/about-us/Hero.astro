@@ -1,23 +1,25 @@
 <section>
-  <div class="hero-gradient" aria-hidden="true"></div>
-  <video autoplay muted loop playsinline class="bg-video">
-    <source src="/videos/GoldenBackgroundSlow.webm" type="video/webm" />
-  </video>
+  <div class="hero-video">
+    <video autoplay muted loop playsinline>
+      <source src="/videos/GoldenBackgroundSlow.webm" type="video/webm" />
+    </video>
+    <div class="hero-gradient" aria-hidden="true"></div>
+  </div>
   <div class="hero-container">
     <div class="lines">
       <p class="title" id="title1">What</p>
-      <p class="subtitle">Creation</p>
+      <p class="subtitle" id="sub1">Change</p>
     </div>
     <div class="lines">
-      <p class="subtitle">Inspiration</p>
+      <p class="subtitle" id="sub2">Creation</p>
       <p class="title" id="title2">is</p>
     </div>
     <div class="lines">
       <p class="title" id="title3">Golden</p>
-      <p class="subtitle">Love</p>
+      <p class="subtitle" id="sub3">Inspiration</p>
     </div>
     <div class="lines">
-      <p class="subtitle">Change</p>
+      <p class="subtitle" id="sub4">New</p>
       <p class="title" id="title4">Era?</p>
     </div>
   </div>
@@ -31,17 +33,37 @@
     justify-content: center;
     height: 90dvh;
     margin-top: 8rem;
-    overflow: clip;
   }
 
-  .bg-video {
+  .hero-video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
     z-index: -2;
+    overflow: hidden;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+  }
+  .hero-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      rgba(14, 11, 2, 1) 0%,
+      rgba(14, 11, 2, 0) 20%,
+      rgba(14, 11, 2, 0) 100%
+    );
+    z-index: -1;
   }
 
   .lines {
@@ -67,9 +89,12 @@
 
   .subtitle {
     color: var(--color-white);
-    font-size: 3rem;
+    font-size: 4rem;
     text-align: center;
     height: 80%;
+    font-style: italic;
+    font-weight: 200;
+    opacity: 0.8;
   }
 
   #title1,
@@ -82,6 +107,44 @@
   #title4 {
     text-align: right;
     padding-right: 5rem;
+  }
+
+  #title3 {
+    font-family: "Theonory";
+  }
+
+  #title4 {
+    font-family: "Chillax";
+  }
+
+  @media (max-width: 1600px) {
+    #sub3 {
+      text-align: right;
+      padding-right: 5rem;
+    }
+  }
+
+  @media (max-width: 1320px) {
+    .hero-container {
+      flex-direction: column;
+      overflow: clip;
+      margin-top: 0rem;
+    }
+
+    .subtitle {
+      display: none;
+    }
+
+    #title1,
+    #title2,
+    #title3,
+    #title4 {
+      text-align: center;
+      font-size: clamp(6rem, 23vw, 26dvh);
+      line-height: 1;
+      margin: 0;
+      padding: 0;
+    }
   }
 </style>
 

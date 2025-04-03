@@ -3,7 +3,6 @@
     <video autoplay muted loop playsinline>
       <source src="/videos/GoldenBackgroundSlow.webm" type="video/webm" />
     </video>
-    <div class="hero-gradient" aria-hidden="true"></div>
   </div>
   <div class="hero-container">
     <div class="lines">
@@ -51,30 +50,16 @@
     object-fit: cover;
     filter: brightness(0.5);
   }
-  .hero-gradient {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      0deg,
-      rgba(14, 11, 2, 1) 0%,
-      rgba(14, 11, 2, 0) 20%,
-      rgba(14, 11, 2, 0) 100%
-    );
-    z-index: -1;
-  }
 
   .lines {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between; 
-  border-bottom: 1px solid var(--color-primary-500);
-  padding: 1rem 0;
-}
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-primary-500);
+    padding: 1rem 0;
+  }
 
   p {
     width: 100%;
@@ -82,7 +67,7 @@
   }
 
   .title {
-    font-size: clamp(8rem, 18vw, 20rem); 
+    font-size: clamp(8rem, 18vw, 20rem);
     margin: 0;
     color: var(--color-primary-500);
     text-transform: uppercase;
@@ -92,7 +77,6 @@
     color: var(--color-white);
     font-size: clamp(2rem, 4vw, 4rem);
     text-align: center;
-    height: 80%;
     font-style: italic;
     font-weight: 200;
     opacity: 0.8;
@@ -146,7 +130,6 @@
       margin: 0;
       padding: 0;
     }
-    
   }
 </style>
 

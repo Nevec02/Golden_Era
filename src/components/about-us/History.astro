@@ -1,48 +1,75 @@
 <section>
-  <div class="container">
-    <div class="text">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis quod
-      porro possimus cupiditate facilis ea similique numquam modi, vero minima
-      non in deleniti magni iure, exercitationem debitis esse voluptas, magnam
-      distinctio. Nisi ipsum rem veritatis quaerat tempore cumque? Veniam iste
-      ut reiciendis quidem id quam eaque vel odit dolor!
+  <div class="main-container">
+    <div class="text-container" id="t1">
+      <p class="text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis
+        quod porro possimus cupiditate facilis ea similique numquam modi, vero
+        minima non in deleniti magni iure, exercitationem debitis esse voluptas,
+        magnam distinctio. Nisi ipsum rem veritatis quaerat tempore cumque?
+        Veniam iste ut reiciendis quidem id quam eaque vel odit dolor!
+      </p>
     </div>
-    <div class="text">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis quod
-      porro possimus cupiditate facilis ea similique numquam modi, vero minima
-      non in deleniti magni iure, exercitationem debitis esse voluptas, magnam
-      distinctio. Nisi ipsum rem veritatis quaerat tempore cumque? Veniam iste
-      ut reiciendis quidem id quam eaque vel odit dolor!
+    <div class="text-container" id="t2">
+      <p class="text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis
+        quod porro possimus cupiditate facilis ea similique numquam modi, vero
+        minima non in deleniti magni iure, exercitationem debitis esse voluptas,
+        magnam distinctio. Nisi ipsum rem veritatis quaerat tempore cumque?
+        Veniam iste ut reiciendis quidem id quam eaque vel odit dolor!
+      </p>
     </div>
-    <div class="text">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis quod
-      porro possimus cupiditate facilis ea similique numquam modi, vero minima
-      non in deleniti magni iure, exercitationem debitis esse voluptas, magnam
-      distinctio. Nisi ipsum rem veritatis quaerat tempore cumque? Veniam iste
-      ut reiciendis quidem id quam eaque vel odit dolor!
+    <div class="text-container" id="t3">
+      <p class="text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis
+        quod porro possimus cupiditate facilis ea similique numquam modi, vero
+        minima non in deleniti magni iure, exercitationem debitis esse voluptas,
+        magnam distinctio. Nisi ipsum rem veritatis quaerat tempore cumque?
+        Veniam iste ut reiciendis quidem id quam eaque vel odit dolor!
+      </p>
     </div>
-    <div class="text">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis quod
-      porro possimus cupiditate facilis ea similique numquam modi, vero minima
-      non in deleniti magni iure, exercitationem debitis esse voluptas, magnam
-      distinctio. Nisi ipsum rem veritatis quaerat tempore cumque? Veniam iste
-      ut reiciendis quidem id quam eaque vel odit dolor!
+    <div class="text-container" id="t4">
+      <p class="text">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iste omnis
+        quod porro possimus cupiditate facilis ea similique numquam modi, vero
+        minima non in deleniti magni iure, exercitationem debitis esse voluptas,
+        magnam distinctio. Nisi ipsum rem veritatis quaerat tempore cumque?
+        Veniam iste ut reiciendis quidem id quam eaque vel odit dolor!
+      </p>
     </div>
   </div>
 </section>
 
-
 <style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 8rem;
-    }
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20dvh;
+  }
 
-    .text {
-     color: white;
-     width: 75%;
-    }   
+  .text-container {
+    width: 100%;
+    display: flex;
+  }
+
+  .text-container .text {
+    width: 50%;
+    font-size: clamp(1rem, 6vw, 4rem);
+    text-align: center;
+    color: var(--color-white);
+    line-height: 1.5;
+    padding: 0 5%;
+  }
+
+  #t2,#t4 {
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 1024px) {
+    .text-container .text {
+      width: 90%;
+    }
+      
+  }
 </style>

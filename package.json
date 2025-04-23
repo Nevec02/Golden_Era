@@ -4,13 +4,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.3.0",
-    "astro": "^5.5.6",
+    "@astrojs/sitemap": "^3.3.1",
+    "astro": "^5.7.5",
     "gsap": "^3.12.7",
     "split-type": "^0.3.4"
   }

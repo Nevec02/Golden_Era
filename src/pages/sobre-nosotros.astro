@@ -1,10 +1,78 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/about-us/Hero.astro';
-import History from '../components/about-us/History.astro';
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/atoms/Button.astro";
+
+const founders = [
+  { name: "Jorge", role: "Dirección creativa y realización", image: "/images/CEOJorge.jpg" },
+  { name: "Nacho", role: "Producción y estrategia", image: "/images/CEONacho.jpg" },
+];
 ---
 
-<Layout>
-  <Hero />
-  <History />
+<Layout title="El estudio — Golden Era" description="Conoce a Golden Era, una productora audiovisual independiente nacida en Asturias.">
+  <PageHero
+    eyebrow="Un estudio independiente"
+    title="Dos miradas."
+    accent="Una misma obsesión."
+    description="Hacer que cada historia encuentre la forma visual que solo podía pertenecerle a ella."
+    image="/images/BothCeos.jpg"
+    imageFocus="faces"
+    actionHref="#equipo"
+    actionText="Conócenos"
+  />
+
+  <section class="story chapter">
+    <div class="shell story__grid">
+      <p class="eyebrow">Nuestra forma de mirar</p>
+      <p class="story__statement js-scrub-copy">Golden Era nace para unir lo artístico y lo útil. Nos gusta el cine que remueve, la publicidad que respeta a quien la mira y los videoclips que construyen un mundo, no solo un fondo.</p>
+    </div>
+  </section>
+
+  <section class="founders chapter" id="equipo">
+    <div class="shell founders__head">
+      <p class="eyebrow">Detrás de cámara</p>
+      <h2 class="section-title">Pequeños por diseño. <span class="editorial text-gold">Grandes por ambición.</span></h2>
+    </div>
+    <div class="shell founders__grid">
+      {founders.map((founder) => (
+        <article class="founder">
+          <div class="founder__portrait"><img class="js-parallax" src={founder.image} alt={`Retrato de ${founder.name}, cofundador de Golden Era`} loading="lazy" /></div>
+          <div class="founder__meta"><h3>{founder.name}</h3><p>{founder.role}</p></div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="beliefs chapter">
+    <div class="shell beliefs__grid">
+      <article><i class="ph ph-eye" aria-hidden="true"></i><h3>Mirada</h3><p>La técnica importa cuando ayuda a ver algo de una manera nueva.</p></article>
+      <article><i class="ph ph-handshake" aria-hidden="true"></i><h3>Cercanía</h3><p>Procesos claros, conversaciones directas y acceso real al equipo creativo.</p></article>
+      <article><i class="ph ph-lightning" aria-hidden="true"></i><h3>Impulso</h3><p>Presupuesto y escala no deberían limitar la ambición de una buena idea.</p></article>
+    </div>
+    <div class="beliefs__action shell"><Button href="/contacto" text="Trabajar con nosotros" /></div>
+  </section>
 </Layout>
+
+<style>
+  .story__grid { display: grid; grid-template-columns: 1fr 3fr; gap: 5rem; align-items: start; }
+  .story__statement { max-width: 24ch; font-family: var(--font-display); font-size: clamp(4rem, 6.5vw, 9rem); font-weight: 650; letter-spacing: -0.055em; line-height: 0.98; }
+  .founders { background: var(--color-text-soft); color: var(--color-ink); }
+  .founders .eyebrow, .founders .text-gold { color: var(--color-gold-dark); }
+  .founders__head { margin-bottom: clamp(5rem, 8vw, 10rem); }
+  .founders__head h2 { margin-top: 2.4rem; }
+  .founders__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .founder__portrait { overflow: hidden; aspect-ratio: 4 / 5; border-radius: var(--radius-sm); background: #ddd; }
+  .founder__portrait img { width: 100%; height: 116%; object-fit: cover; filter: grayscale(1) contrast(1.08); transition: filter 500ms ease, transform 700ms var(--ease-out); }
+  .founder:hover img { filter: grayscale(0.2) sepia(0.22); transform: scale(1.025); }
+  .founder__meta { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; padding-block: 2rem; border-bottom: 1px solid rgba(14, 11, 2, 0.3); }
+  .founder__meta h3 { font-size: clamp(3rem, 4vw, 5rem); letter-spacing: -0.04em; }
+  .founder__meta p { text-align: right; }
+  .beliefs__grid { display: grid; grid-template-columns: repeat(3, 1fr); border-block: 1px solid var(--color-line); }
+  .beliefs article { min-height: 34rem; padding: 3rem; border-right: 1px solid var(--color-line); }
+  .beliefs article:last-child { border-right: 0; }
+  .beliefs article > i { color: var(--color-gold); font-size: 3rem; }
+  .beliefs h3 { margin-top: 8rem; font-size: clamp(3rem, 4vw, 5rem); }
+  .beliefs p { max-width: 30ch; margin-top: 1.4rem; color: var(--color-text-muted); }
+  .beliefs__action { display: flex; justify-content: flex-end; margin-top: 4rem; }
+  @media (max-width: 767px) { .story__grid { grid-template-columns: 1fr; } .founders__grid, .beliefs__grid { grid-template-columns: 1fr; } .beliefs article { border-right: 0; border-bottom: 1px solid var(--color-line); } .founder__meta { align-items: flex-start; flex-direction: column; } .founder__meta p { text-align: left; } }
+</style>

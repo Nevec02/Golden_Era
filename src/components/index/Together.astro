@@ -1,114 +1,343 @@
 ---
 import Button from "../atoms/Button.astro";
+
+const services = [
+  { title: "Cine", text: "Cortometrajes y piezas narrativas donde cada plano empuja la historia.", image: "/images/Shortfilm_EsRetina.webp", icon: "ph-film-strip" },
+  { title: "Videoclips", text: "Universos visuales para artistas que quieren sonar también con los ojos.", image: "/images/Shortfilm_firmadoWilson.png", icon: "ph-music-notes" },
+  { title: "Marcas", text: "Campañas, producto y contenido que traduce estrategia en deseo.", image: "/images/ProjectPhoto_calvinklein.png", icon: "ph-megaphone" },
+  { title: "Experimental", text: "Motion, instalaciones y formatos que todavía no tienen una etiqueta cómoda.", image: "/images/Shortfilm_theHive.png", icon: "ph-sparkle" },
+];
 ---
 
-<section>
-  <div class="team-with-us">
-    <h2>Juntos, hacemos posible lo imposible.</h2>
-    <div class="main-container">
-      <article>
-        <h3 class="title">
-          Como tu aliado <span class="word">estratégico</span>
-        </h3>
-        <hr class="divider" />
-        <p class="text">
-          Nos enfocamos en entender tu visión para crear soluciones de
-          comunicación visual que no solo impacten, sino que se alineen con tus
-          objetivos de negocio. Ya sea para publicidad en pantallas LED, videos
-          corporativos o contenido artístico, trabajamos para que cada mensaje
-          se entregue de forma eficaz y memorable.
-        </p>
-      </article>
-      <article>
-        <h3 class="title">
-          Como tu aliado <span class="word">creativo</span>
-        </h3>
-        <hr class="divider" />
-        <p class="text">
-          Transformamos tu mensaje en experiencias visuales únicas. Creamos
-          conceptos innovadores para pantallas LED y videos corporativos, y
-          llevamos la creatividad un paso más allá, creando contenido para
-          artistas y proyectos con una visión auténtica y sin restricciones.
-        </p>
-      </article>
-      <article>
-        <h3 class="title">
-          Como tu aliado <span class="word">productor</span>
-        </h3>
-        <hr class="divider" />
-        <p class="text">
-          La ejecución es clave. Desde la grabación hasta la postproducción,
-          garantizamos una calidad de producción excepcional en cada proyecto.
-          Nos encargamos de hacer realidad tu visión, ya sea en un video
-          corporativo o en una obra artística, con la perfección técnica que tu
-          marca merece.
-        </p>
-      </article>
+<section class="services chapter">
+  <div class="services__head shell">
+    <p class="eyebrow">Lo que hacemos</p>
+    <h2 class="section-title">Una misma mirada. <span class="editorial text-gold">Muchos formatos.</span></h2>
+  </div>
+
+  <div class="service-stage shell">
+    <div class="service-stage__visuals" aria-live="polite">
+      {services.map((service, index) => (
+        <figure class:list={["service-visual", { "is-active": index === 0 }]} data-service-visual={index}>
+          <img src={service.image} alt={`Fotograma del servicio ${service.title}`} loading={index === 0 ? "eager" : "lazy"} />
+          <figcaption><span>0{index + 1}</span>{service.title}</figcaption>
+        </figure>
+      ))}
+      <div class="service-stage__stamp" aria-hidden="true">
+        <i class="ph ph-play" aria-hidden="true"></i>
+        <span>Imagen<br />en movimiento</span>
+      </div>
     </div>
-    <Button href="/servicios" text="Conoce los servicios" />
+
+    <div class="service-list">
+      {services.map((service, index) => (
+        <button
+          class:list={["service-row", { "is-active": index === 0 }]}
+          type="button"
+          data-service-trigger={index}
+          aria-pressed={index === 0 ? "true" : "false"}
+        >
+          <span class="service-row__index">0{index + 1}</span>
+          <i class:list={["ph", service.icon, "service-row__icon"]} aria-hidden="true"></i>
+          <span class="service-row__copy">
+            <strong>{service.title}</strong>
+            <span>{service.text}</span>
+          </span>
+          <i class="ph ph-arrow-down-left service-row__arrow" aria-hidden="true"></i>
+        </button>
+      ))}
+      <div class="service-list__footer">
+        <p>Del primer gesto al último fotograma.</p>
+        <Button href="/servicios" type="secondary" text="Conocer servicios" />
+      </div>
+    </div>
   </div>
 </section>
 
+<script>
+  const initServiceStage = () => {
+    const stages = document.querySelectorAll<HTMLElement>(".service-stage");
+
+    stages.forEach((stage) => {
+      if (stage.dataset.ready === "true") return;
+      stage.dataset.ready = "true";
+
+      const triggers = Array.from(stage.querySelectorAll<HTMLButtonElement>("[data-service-trigger]"));
+      const visuals = Array.from(stage.querySelectorAll<HTMLElement>("[data-service-visual]"));
+
+      const activate = (index: number) => {
+        triggers.forEach((trigger, triggerIndex) => {
+          const isActive = triggerIndex === index;
+          trigger.classList.toggle("is-active", isActive);
+          trigger.setAttribute("aria-pressed", String(isActive));
+        });
+        visuals.forEach((visual, visualIndex) => visual.classList.toggle("is-active", visualIndex === index));
+      };
+
+      triggers.forEach((trigger, index) => {
+        trigger.addEventListener("pointerenter", () => activate(index));
+        trigger.addEventListener("focus", () => activate(index));
+        trigger.addEventListener("click", () => activate(index));
+      });
+    });
+  };
+
+  initServiceStage();
+  document.addEventListener("astro:page-load", initServiceStage);
+</script>
+
 <style>
-  .team-with-us {
+  .services__head {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: end;
+    gap: 5rem;
+    margin-bottom: clamp(5rem, 8vw, 10rem);
+  }
+
+  .service-stage {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(48rem, 1.12fr);
+    gap: clamp(2rem, 4vw, 7rem);
+    align-items: start;
+  }
+
+  .service-stage__visuals {
+    position: relative;
+    overflow: hidden;
+    min-height: min(76rem, 78vh);
+    border-radius: var(--radius-sm);
+    isolation: isolate;
+    background: var(--color-gold-dark);
+  }
+
+  .service-visual {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    clip-path: inset(100% 0 0);
+    opacity: 0;
+    transform: scale(1.08);
+    transition:
+      clip-path 800ms var(--ease-out),
+      opacity 250ms ease,
+      transform 1100ms var(--ease-out);
+  }
+
+  .service-visual.is-active {
+    z-index: 1;
+    clip-path: inset(0);
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .service-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.08) saturate(0.82) brightness(0.82);
+  }
+
+  .service-visual::after {
+    position: absolute;
+    content: "";
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(9, 7, 2, 0.82));
+  }
+
+  .service-visual figcaption {
+    position: absolute;
+    z-index: 2;
+    right: 2.4rem;
+    bottom: 2.4rem;
+    left: 2.4rem;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-text);
+    font-size: clamp(3.8rem, 5vw, 7rem);
+    font-weight: 720;
+    letter-spacing: -0.055em;
+    line-height: 0.92;
+  }
+
+  .service-visual figcaption span {
+    color: var(--color-gold-light);
+    font-size: 1.3rem;
+    letter-spacing: 0.14em;
+  }
+
+  .service-stage__stamp {
+    position: absolute;
+    z-index: 3;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    width: 12rem;
+    height: 12rem;
     align-items: center;
     justify-content: center;
-    gap: 5rem;
-    padding: 0 5rem;
+    gap: 0.8rem;
+    border-radius: 50%;
+    background: var(--color-gold);
+    color: var(--color-ink);
+    font-size: 1.1rem;
+    font-weight: 760;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    animation: breathe 3.4s ease-in-out infinite;
   }
-  .team-with-us h2 {
-    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-bigger));
-    color: var(--color-primary-500);
-    margin: 0 0 var(--margin-large) 0;
-    padding: 0;
+
+  .service-stage__stamp i { font-size: 2rem; }
+
+  .service-list {
+    border-top: 1px solid var(--color-line);
   }
-  .main-container {
+
+  .service-row {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    width: 100%;
+    min-height: 14.5rem;
+    grid-template-columns: 4rem 5rem 1fr 4rem;
+    align-items: center;
+    gap: clamp(1.2rem, 2vw, 2.8rem);
+    padding: 2.4rem 1.4rem;
+    border: 0;
+    border-bottom: 1px solid var(--color-line);
+    background: transparent;
+    color: var(--color-text);
+    text-align: left;
+    cursor: pointer;
+    isolation: isolate;
+  }
+
+  .service-row::before {
+    position: absolute;
+    z-index: -1;
+    content: "";
+    inset: 0;
+    background: var(--color-gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 560ms var(--ease-out);
+  }
+
+  .service-row.is-active::before,
+  .service-row:hover::before,
+  .service-row:focus-visible::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .service-row.is-active,
+  .service-row:hover,
+  .service-row:focus-visible {
+    color: var(--color-ink);
+  }
+
+  .service-row:focus-visible { outline: 2px solid var(--color-text); outline-offset: 3px; }
+
+  .service-row__index {
+    align-self: start;
+    padding-top: 0.7rem;
+    font-size: 1.1rem;
+    font-weight: 740;
+    letter-spacing: 0.12em;
+  }
+
+  .service-row__icon {
+    display: grid;
+    width: 4.8rem;
+    height: 4.8rem;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-size: 2.1rem;
+  }
+
+  .service-row__copy {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .service-row__copy strong {
+    font-size: clamp(3rem, 3.5vw, 5.5rem);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .service-row__copy > span {
+    max-width: 48ch;
+    color: var(--color-text-muted);
+    font-size: 1.45rem;
+    transition: color 350ms ease, transform 500ms var(--ease-out);
+  }
+
+  .service-row.is-active .service-row__copy > span,
+  .service-row:hover .service-row__copy > span,
+  .service-row:focus-visible .service-row__copy > span {
+    color: rgba(14, 11, 2, 0.74);
+    transform: translateX(0.6rem);
+  }
+
+  .service-row__arrow {
+    font-size: 2.4rem;
+    transform: rotate(45deg);
+    transition: transform 500ms var(--ease-out);
+  }
+
+  .service-row.is-active .service-row__arrow,
+  .service-row:hover .service-row__arrow { transform: rotate(0); }
+
+  .service-list__footer {
     display: flex;
-    flex-direction: row;
-    gap: 5%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-top: 3rem;
   }
-  article {
-    width: 90%;
+
+  .service-list__footer p {
+    max-width: 20ch;
+    color: var(--color-text-muted);
   }
-  .divider {
-    border: 1px solid var(--color-primary-500);
-    filter: brightness(0.5);
-  }
-  article h3 {
-    font-size: var(--font-size-xlarge);
-    font-weight: normal;
-    margin: 0 0 var(--margin-medium) 0;
-    padding: 0;
-  }
-  .word {
-    display: block;
-  }
-  article p {
-    font-size: var(--font-size-medium);
-    filter: brightness(0.8);
-    width: 80%;
-    margin: 0;
-    padding: 0;
-    line-height: 3rem;
+
+  @keyframes breathe {
+    50% { transform: scale(0.94) rotate(-4deg); }
   }
 
   @media (max-width: 900px) {
-    .team-with-us {
-      padding: 0 0 0 1.5rem;
-    }
-    .main-container {
-      flex-direction: column;
-      gap: 5rem;
+    .services__head { grid-template-columns: 1fr; }
+
+    .service-stage {
+      display: grid;
+      grid-template-columns: 1fr;
     }
 
-    article {
-      width: 95%;
+    .service-stage__visuals { min-height: min(68rem, 70vh); }
+  }
+
+  @media (max-width: 600px) {
+    .service-stage__visuals { min-height: 48rem; }
+    .service-stage__stamp { width: 9rem; height: 9rem; font-size: 0.9rem; }
+
+    .service-row {
+      min-height: 13rem;
+      grid-template-columns: 3rem 1fr 3rem;
     }
 
-    article p{
-      width: 90%;
-    }
+    .service-row__icon { display: none; }
+    .service-row__copy > span { font-size: 1.3rem; }
+    .service-list__footer { align-items: flex-start; flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-stage__stamp { animation: none; }
+    .service-visual,
+    .service-row::before,
+    .service-row__copy > span,
+    .service-row__arrow { transition: none; }
   }
 </style>

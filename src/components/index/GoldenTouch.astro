@@ -1,39 +1,179 @@
 ---
 import Button from "../atoms/Button.astro";
+
+const projects = [
+  { title: "Film Shots", type: "Showreel", media: "/videos/FilmShotsResume.webm", kind: "video", className: "project--wide" },
+  { title: "CK One", type: "Dirección de producto", media: "/images/ProjectPhoto_calvinklein.png", kind: "image", className: "project--tall" },
+  { title: "Es Retina", type: "Spot narrativo", media: "/images/Shortfilm_EsRetina.webp", kind: "image", className: "project--short", href: "https://www.youtube.com/watch?v=DC9nocsGars" },
+  { title: "Lootbox", type: "Cortometraje", media: "/images/Shortfilm_lootbox.png", kind: "image", className: "project--short", href: "https://www.youtube.com/watch?v=AlPmD6MfZH8" },
+  { title: "The Hive", type: "Cortometraje", media: "/images/Shortfilm_theHive.png", kind: "image", className: "project--short", href: "https://www.youtube.com/watch?v=r54NXbDTr2Q" },
+  { title: "Firmado, Wilson", type: "Cortometraje", media: "/images/Shortfilm_firmadoWilson.png", kind: "image", className: "project--short", href: "https://www.youtube.com/watch?v=opoygp__kh0" },
+];
 ---
 
-<section>
-  <div class="main-container">
-    <h2>
-      No creemos en lo convencional. En Golden Era, cada proyecto es una
-      exploración de nuevas formas de contar historias, de romper límites y de
-      conectar con las personas de una manera única.
-    </h2>
+<section class="projects chapter" id="proyectos">
+  <div class="projects__head shell">
+    <div>
+      <p class="eyebrow">Trabajo seleccionado</p>
+      <h2 class="section-title">Historias con <span class="editorial text-gold">pulso propio.</span></h2>
+    </div>
+    <Button href="/proyectos" type="secondary" text="Ver todo el trabajo" />
+  </div>
+
+  <div class="bento shell">
+    {projects.map((project) => (
+      <a
+        class:list={["project", project.className]}
+        href={project.href ?? "/proyectos"}
+        target={project.href ? "_blank" : undefined}
+        rel={project.href ? "noopener noreferrer" : undefined}
+        aria-label={project.href ? `Ver ${project.title} en YouTube` : `Ver ${project.title}`}
+      >
+        <div class="project__media">
+          {project.kind === "video" ? (
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src={project.media} type="video/webm" />
+            </video>
+          ) : (
+            <img src={project.media} alt={`Fotograma de ${project.title}`} loading="lazy" />
+          )}
+        </div>
+        <div class="project__shade" aria-hidden="true"></div>
+        <div class="project__meta">
+          <span>{project.type}{project.href && " · Ver en YouTube"}</span>
+          <h3>{project.title}</h3>
+        </div>
+        <i class:list={["ph", project.href ? "ph-youtube-logo" : "ph-arrow-up-right", "project__icon"]} aria-hidden="true"></i>
+      </a>
+    ))}
   </div>
 </section>
 
 <style>
-  .main-container {
+  .projects {
+    background: var(--color-text-soft);
+    color: var(--color-ink);
+  }
+
+  .projects__head {
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    padding: 0 5rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-bottom: clamp(5rem, 8vw, 10rem);
   }
 
-  .main-container h2 {
-    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-xxlarge));
-    max-width: 80%;
+  .projects .eyebrow { color: var(--color-gold-dark); }
+  .projects .text-gold { color: var(--color-gold-dark); }
+  .projects :global(.button--secondary) { border-color: var(--color-ink); color: var(--color-ink); }
+
+  h2 { margin-top: 2.4rem; }
+
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    grid-auto-rows: clamp(24rem, 30vw, 46rem);
+    gap: 1rem;
   }
 
-  @media (max-width: 768px) {
+  .project {
+    position: relative;
+    overflow: hidden;
+    min-height: 32rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    isolation: isolate;
+  }
 
-    .main-container{
-      padding: 0 0 0 1.5rem;
+  .project--wide { grid-column: span 7; }
+  .project--tall { grid-column: span 5; }
+  .project--short { grid-column: span 3; }
+
+  .project__media,
+  .project__shade {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+  }
+
+  .project__media img,
+  .project__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out), filter 700ms var(--ease-out);
+  }
+
+  .project__shade {
+    z-index: -1;
+    background: linear-gradient(180deg, transparent 34%, rgba(14, 11, 2, 0.88));
+  }
+
+  .project__meta {
+    position: absolute;
+    right: 2.4rem;
+    bottom: 2.4rem;
+    left: 2.4rem;
+  }
+
+  .project__meta span {
+    color: var(--color-gold-light);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project__meta h3 {
+    margin-top: 0.5rem;
+    font-size: clamp(3rem, 4vw, 6rem);
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+
+  .project__icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: grid;
+    width: 4.8rem;
+    height: 4.8rem;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--color-gold);
+    color: var(--color-ink);
+    font-size: 2rem;
+    transform: translateY(-7rem);
+    transition: transform 360ms var(--ease-out);
+  }
+
+  .project:hover .project__media img,
+  .project:hover .project__media video {
+    filter: saturate(1.12) contrast(1.08);
+    transform: scale(1.05);
+  }
+
+  .project:hover .project__icon { transform: translateY(0); }
+
+  @media (max-width: 800px) {
+    .projects__head {
+      align-items: flex-start;
+      flex-direction: column;
     }
-      .main-container h2 {
-        font-size: clamp(var(--font-size-medium), 8vw, var(--font-size-xlarge));
-        max-width: 100%;
-      }
-  }
 
+    .bento {
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+    }
+
+    .project--wide,
+    .project--tall,
+    .project--short {
+      grid-column: 1;
+      min-height: 48rem;
+    }
+
+    .project--short { min-height: 34rem; }
+  }
 </style>

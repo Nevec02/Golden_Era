@@ -1,39 +1,38 @@
 ---
+import "@fontsource-variable/outfit";
+import "@phosphor-icons/web/regular";
+import "@phosphor-icons/web/bold";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Golden Era — Producción audiovisual",
+  description = "Productora audiovisual en Asturias. Cortometrajes, videoclips, contenido de marca y piezas que se quedan en la retina.",
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0e0b02" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
-    <title>Golden Era</title>
+    <title>{title}</title>
   </head>
   <body>
-    <!-- 
-      ::::::::   ::::::::  :::        :::::::::  :::::::::: ::::    ::: 
-    :+:    :+: :+:    :+: :+:        :+:    :+: :+:        :+:+:   :+:  
-   +:+        +:+    +:+ +:+        +:+    +:+ +:+        :+:+:+  +:+   
-  :#:        +#+    +:+ +#+        +#+    +:+ +#++:++#   +#+ +:+ +#+    
- +#+   +#+# +#+    +#+ +#+        +#+    +#+ +#+        +#+  +#+#+#     
-#+#    #+# #+#    #+# #+#        #+#    #+# #+#        #+#   #+#+#      
-########   ########  ########## #########  ########## ###    ####       
-
-                    :::::::::: :::::::::      ::: 
-                   :+:        :+:    :+:   :+: :+:
-                  +:+        +:+    +:+  +:+   +:+
-                 +#++:++#   +#++:++#:  +#++:++#++:
-                +#+        +#+    +#+ +#+     +#+ 
-               #+#        #+#    #+# #+#     #+#  
-              ########## ###    ### ###     ###   
--->
-    <div class="page-wrapper">
+    <a href="#main" class="skip-link">Ir al contenido principal</a>
+    <div class="site-shell">
       <Nav />
-      <main>
+      <main id="main" class="overflow-guard">
         <slot />
       </main>
       <Footer />
@@ -43,16 +42,8 @@ import Footer from "../components/Footer.astro";
 
 <style is:global>
   @font-face {
-    font-family: "Inter";
-    src: url(/fonts/InterFont.ttf);
-    font-weight: 100 900;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
     font-family: "Chillax";
-    src: url(/fonts/Chillax-Variable.ttf);
+    src: url("/fonts/Chillax-Variable.ttf") format("truetype");
     font-weight: 100 900;
     font-style: normal;
     font-display: swap;
@@ -60,118 +51,320 @@ import Footer from "../components/Footer.astro";
 
   @font-face {
     font-family: "Theonory";
-    src: url(/fonts/Theonory-Regular.ttf);
-    font-weight: 100 900;
+    src: url("/fonts/Theonory-Regular.ttf") format("truetype");
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
     font-family: "NewTitle";
-    src: url(/fonts/NewTitle.otf); 
-    font-weight: 100;
+    src: url("/fonts/NewTitle.otf") format("opentype");
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
   }
 
   :root {
-    --font-size-small: 1rem;
-    --font-size-sm: 1.4rem;
-    --font-size-medium: 1.618rem;
-    --font-size-large: 2.618rem;
-    --font-size-xlarge: 4.236rem;
-    --font-size-xxlarge: 6.854rem;
-    --font-size-larger: 11.089772rem;
-    --font-size-bigger: 17.9432511rem;
-
-    --margin-small: 1rem;
-    --margin-medium: 2rem;
-    --margin-large: 4rem;
-    --margin-xlarge: 8rem;
-    --margin-xxlarge: 12rem;
-    --margin-xxxlarge: 16rem;
-
-    --color-white: #ffffff;
-    --color-black: #0e0b02;
-    --color-background: #0e0b02;
-
-    --color-primary-50: #faf1da;
-    --color-primary-100: #f5e3b6;
-    --color-primary-200: #f0d491;
-    --color-primary-300: #eac66c;
-    --color-primary-400: #e5b848;
-    --color-primary-500: #e0aa23;
-    --color-primary-600: #bd8f1b;
-    --color-primary-700: #977215;
-    --color-primary-800: #725610;
-    --color-primary-900: #4c390b;
-    
-    --border-radius: 5rem;
-  }
-
-  ::selection {
-    background-color: var(--color-primary-500);
-    color: var(--color-black);
-  }
-
-  ::-moz-selection {
-    background-color: var(--color-primary-500);
-    color: var(--color-white);
-  }
-  footer ::selection {
-    background-color: var(--color-background);
-    color: var(--color-primary-500);
-  }
-
-  footer ::-moz-selection {
-    background-color: var(--color-background);
-    color: var(--color-primary-500);
-  }
-  
-
-  .element {
-    cursor: url("/src/assets/logos/goldensun.svg"), auto;
-  }
-
-  .page-wrapper {
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr auto;
-  }
-  html {
-    font-size: 62.5%;
+    color-scheme: dark;
+    --font-display: "Chillax", "Outfit Variable", sans-serif;
+    --font-body: "Outfit Variable", "Chillax", sans-serif;
+    --font-editorial: "Theonory", Georgia, serif;
+    --font-mark: "NewTitle", "Chillax", sans-serif;
+    --color-bg: #0e0b02;
+    --color-surface: #171207;
+    --color-surface-soft: #211a0b;
+    --color-text: #ffffff;
+    --color-text-soft: #faf1da;
+    --color-text-muted: #b9b29f;
+    --color-gold: #e0aa23;
+    --color-gold-light: #f0d491;
+    --color-gold-dark: #977215;
+    --color-ink: #0e0b02;
+    --color-line: rgba(224, 170, 35, 0.38);
+    --gutter: clamp(1.8rem, 4vw, 7rem);
+    --section-space: clamp(11rem, 15vw, 22rem);
+    --content-max: 160rem;
+    --radius-sm: 1.6rem;
+    --radius-md: 2.8rem;
+    --radius-lg: clamp(3rem, 5vw, 6rem);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   *,
   *::before,
   *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
     min-width: 0;
   }
 
+  html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    background: var(--color-bg);
+  }
+
   body {
-    font-size: 1.6rem; /* 1rem = 10px.*/
-    font-family: "Inter", "Segoe UI", sans-serif;
     margin: 0;
-    min-height: 100dvh;
-    background-color: var(--color-background);
-    color: var(--color-white);
+    min-height: 100svh;
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at 75% 12%, rgba(224, 170, 35, 0.09), transparent 28%),
+      var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: clamp(1.6rem, 1.45rem + 0.18vw, 1.9rem);
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+
+  body::before {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  img,
+  video,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1,
   h2,
   h3,
-  h4 {
-    text-wrap: balance;
+  h4,
+  p {
     margin: 0;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
   }
 
   p {
     text-wrap: pretty;
-    margin: 0;
   }
 
-  section{
-    margin-bottom: var(--margin-xxxlarge);
+  :focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 4px;
+  }
+
+  .site-shell {
+    min-height: 100svh;
+  }
+
+  .overflow-guard {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .shell {
+    width: min(calc(100% - (var(--gutter) * 2)), var(--content-max));
+    margin-inline: auto;
+  }
+
+  .chapter {
+    padding-block: var(--section-space);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    width: 2.8rem;
+    height: 1px;
+    content: "";
+    background: currentColor;
+  }
+
+  .display-title,
+  .max-w-display {
+    max-width: min(14ch, 1320px);
+    font-size: clamp(5.6rem, 10.8vw, 17rem);
+    font-weight: 760;
+    letter-spacing: -0.065em;
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    max-width: 15ch;
+    font-size: clamp(4.8rem, 7.2vw, 11rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 0.88;
+  }
+
+  .editorial {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+  }
+
+  .text-gold {
+    color: var(--color-gold);
+  }
+
+  .text-soft {
+    color: var(--color-text-soft);
+  }
+
+  .skip-link {
+    position: fixed;
+    z-index: 1000;
+    top: 1rem;
+    left: 1rem;
+    padding: 1.2rem 1.8rem;
+    border-radius: 999px;
+    background: var(--color-gold);
+    color: var(--color-ink);
+    font-weight: 700;
+    transform: translateY(-160%);
+    transition: transform 180ms ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
+  @media (max-width: 767px) {
+    :root {
+      --gutter: 1.8rem;
+      --section-space: clamp(9rem, 28vw, 14rem);
+    }
+
+    .display-title,
+    .max-w-display {
+      max-width: 10ch;
+      font-size: clamp(5rem, 18vw, 8.4rem);
+      line-height: 0.88;
+    }
+
+    .section-title {
+      font-size: clamp(4.4rem, 14vw, 7rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 </style>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+  import SplitType from "split-type";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!reduceMotion) {
+    const heroItems = document.querySelectorAll(".js-hero-reveal");
+    gsap.fromTo(
+      heroItems,
+      { y: 36, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.9, stagger: 0.08, ease: "power2.out" },
+    );
+
+    document.querySelectorAll<HTMLElement>(".js-scrub-copy").forEach((element) => {
+      const split = new SplitType(element, { types: "words" });
+      gsap.fromTo(
+        split.words,
+        { opacity: 0.12 },
+        {
+          opacity: 1,
+          stagger: 0.05,
+          ease: "none",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 78%",
+            end: "bottom 42%",
+            scrub: 1,
+          },
+        },
+      );
+    });
+
+    document.querySelectorAll<HTMLElement>(".js-parallax").forEach((media) => {
+      gsap.fromTo(
+        media,
+        { yPercent: -6, scale: 1.04 },
+        {
+          yPercent: 6,
+          ease: "none",
+          scrollTrigger: {
+            trigger: media.parentElement,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        },
+      );
+    });
+
+    gsap.matchMedia().add("(min-width: 1024px)", () => {
+      const process = document.querySelector(".process");
+      const processIntro = document.querySelector(".process__intro");
+      if (process && processIntro) {
+        ScrollTrigger.create({
+          trigger: process,
+          start: "top 12%",
+          end: "bottom 88%",
+          pin: processIntro,
+          pinSpacing: false,
+        });
+      }
+    });
+  }
+</script>

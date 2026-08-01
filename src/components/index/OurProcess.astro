@@ -1,262 +1,148 @@
-<section>
-  <div class="process-title">
-    <h2>Te contamos nuestro proceso</h2>
-  </div>
-  <div class="main-container">
-    <div id="step1" class="steps">
-      <div class="left">
-        <h3>Concepto & Estrategia</h3>
-        <p>
-          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
-          cliente para definir un concepto sólido, explorar referencias y
-          establecer la estrategia creativa que dará forma a una pieza única y
-          poderosa.
-        </p>
-        <div class="list">
-          <ul>
-            <li>+ Diseño de protagonista</li>
-            <li>+ Narrativa</li>
-            <li>+ Estrategia creativa</li>
-            <li>+ Visión de mercado</li>
-            <li>+ Estrategia de marketing</li>
-          </ul>
-        </div>
-      </div>
-      <div class="right">
-        <img src="https://picsum.photos/1080" alt="" />
-      </div>
+---
+const steps = [
+  { title: "Escuchamos", text: "Entendemos la intención, la audiencia y el lugar exacto donde la pieza tiene que hacer efecto.", tags: ["Brief", "Investigación", "Objetivos"], image: "/images/BothCeos.jpg" },
+  { title: "Diseñamos", text: "Construimos concepto, guion, referencias y lenguaje visual antes de encender la cámara.", tags: ["Concepto", "Guion", "Dirección de arte"], image: "/images/OurCamera.png" },
+  { title: "Rodamos", text: "Convertimos la preparación en imágenes: equipo ágil, decisiones precisas y espacio para lo inesperado.", tags: ["Producción", "Dirección", "Fotografía"], image: "/images/ProjectPhoto_calvinklein.png" },
+  { title: "Terminamos", text: "Montaje, color, sonido y motion trabajan juntos hasta que la pieza tiene el pulso correcto.", tags: ["Edición", "Color", "Entrega"], image: "/images/Shortfilm_lootbox.png" },
+];
+---
+
+<section class="process chapter">
+  <div class="process__layout shell">
+    <div class="process__intro">
+      <p class="eyebrow">Cómo trabajamos</p>
+      <h2 class="section-title">Del primer impulso al <span class="editorial text-gold">último frame.</span></h2>
+      <p>Un proceso claro para que la creatividad pueda ser valiente sin perder el control.</p>
     </div>
-    <div id="step2" class="steps">
-      <div class="left">
-        <h3>Concepto & Estrategia</h3>
-        <p>
-          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
-          cliente para definir un concepto sólido, explorar referencias y
-          establecer la estrategia creativa que dará forma a una pieza única y
-          poderosa.
-        </p>
-        <div class="list">
-          <ul>
-            <li>+ Diseño de protagonista</li>
-            <li>+ Narrativa</li>
-            <li>+ Estrategia creativa</li>
-            <li>+ Visión de mercado</li>
-            <li>+ Estrategia de marketing</li>
-          </ul>
-        </div>
-      </div>
-      <div class="right">
-        <img src="https://picsum.photos/1080" alt="" />
-      </div>
-    </div>
-    <div id="step3" class="steps">
-      <div class="left">
-        <h3>Concepto & Estrategia</h3>
-        <p>
-          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
-          cliente para definir un concepto sólido, explorar referencias y
-          establecer la estrategia creativa que dará forma a una pieza única y
-          poderosa.
-        </p>
-        <div class="list">
-          <ul>
-            <li>+ Diseño de protagonista</li>
-            <li>+ Narrativa</li>
-            <li>+ Estrategia creativa</li>
-            <li>+ Visión de mercado</li>
-            <li>+ Estrategia de marketing</li>
-          </ul>
-        </div>
-      </div>
-      <div class="right">
-        <img src="https://picsum.photos/1080" alt="" />
-      </div>
-    </div>
-    <div id="step4" class="steps">
-      <div class="left">
-        <h3>Concepto & Estrategia</h3>
-        <p>
-          Cada proyecto comienza con una idea. Nos sumergimos en la visión del
-          cliente para definir un concepto sólido, explorar referencias y
-          establecer la estrategia creativa que dará forma a una pieza única y
-          poderosa.
-        </p>
-        <div class="list">
-          <ul>
-            <li>+ Diseño de protagonista</li>
-            <li>+ Narrativa</li>
-            <li>+ Estrategia creativa</li>
-            <li>+ Visión de mercado</li>
-            <li>+ Estrategia de marketing</li>
-          </ul>
-        </div>
-      </div>
-      <div class="right">
-        <img src="https://picsum.photos/1080" alt="" />
-      </div>
+
+    <div class="process__steps">
+      {steps.map((step, index) => (
+        <article class="step">
+          <div class="step__media">
+            <img class="js-parallax" src={step.image} alt="" loading="lazy" />
+          </div>
+          <div class="step__copy">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+            <ul>{step.tags.map((tag) => <li>{tag}</li>)}</ul>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
 
 <style>
-  .main-container {
+  .process {
+    background: var(--color-surface);
+  }
+
+  .process__layout {
+    display: grid;
+    grid-template-columns: minmax(30rem, 0.8fr) minmax(0, 1.5fr);
+    gap: clamp(5rem, 9vw, 14rem);
+    align-items: start;
+  }
+
+  .process__intro {
+    top: 12vh;
+  }
+
+  .process__intro h2 { margin-top: 2.4rem; }
+
+  .process__intro > p:last-child {
+    max-width: 42ch;
+    margin-top: 3rem;
+    color: var(--color-text-muted);
+  }
+
+  .process__steps {
+    display: grid;
+    gap: 3rem;
+  }
+
+  .step {
+    position: relative;
+    overflow: hidden;
+    min-height: min(76rem, 82vh);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+
+  .step__media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .step__media::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(180deg, rgba(14, 11, 2, 0.1), rgba(14, 11, 2, 0.94) 80%);
+  }
+
+  .step__media img {
     width: 100%;
-    height: 500vh; /* Este valor rarete es para que la animación funcione correctamente del pin */
-    overflow: clip;
-  }
-
-  .process-title h2 {
-    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-larger));
-    color: var(--color-primary-500);
-    margin: 0 0 var(--margin-xxlarge) 0;
-    padding: 0;
-    text-align: center;
-  }
-
-  #step1,
-  #step3 {
-    background-color: var(--color-primary-500);
-    color: var(--color-black);
-  }
-
-  #step2,
-  #step4 {
-    background-color: var(--color-black);
-    color: var(--color-white);
-  }
-
-  .steps {
-    width: 100%;
-    height: 100dvh; /* Este valor influye en start y end de animación */
-    display: flex;
-  }
-
-  .steps .left {
-    width: 50%;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: left;
-  }
-
-  .left h3 {
-    font-size: var(--font-size-xxlarge);
-    font-weight: normal;
-    margin: 0 0 var(--margin-large) 0;
-  }
-
-  .left p {
-    font-size: var(--font-size-large);
-    margin: 0;
-    line-height: 4rem;
-  }
-
-  .list {
-    display: flex;
-    width: 100%;
-    justify-content: start;
-    margin-top: var(--margin-xlarge);
-    margin-bottom: var(--margin-xxlarge);
-  }
-
-  .list ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .steps .right {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: clip;
-  }
-
-  .steps .right img {
-    width: 100%;
-    height: 100%;
+    height: 116%;
     object-fit: cover;
+    filter: saturate(0.55) contrast(1.08);
+  }
+
+  .step__copy {
+    position: absolute;
+    right: clamp(2.4rem, 4vw, 5rem);
+    bottom: clamp(2.4rem, 4vw, 5rem);
+    left: clamp(2.4rem, 4vw, 5rem);
+  }
+
+  .step__copy > span {
+    color: var(--color-gold);
+    font-size: 1.3rem;
+    font-weight: 760;
+    letter-spacing: 0.12em;
+  }
+
+  h3 {
+    margin-top: 0.8rem;
+    font-size: clamp(4rem, 7vw, 9rem);
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+  }
+
+  .step__copy p {
+    max-width: 48ch;
+    margin-top: 1.8rem;
+    color: var(--color-text-soft);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 0;
+    margin: 2.4rem 0 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 0.7rem 1.2rem;
+    border: 1px solid rgba(240, 212, 145, 0.45);
+    border-radius: 999px;
+    color: var(--color-text-soft);
+    font-size: 1.2rem;
+    font-weight: 650;
   }
 
   @media (max-width: 1023px) {
-    .steps {
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .steps .left {
-      width: 100%;
-      min-height: 50vh;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    .steps .left h3 {
-      font-size: var(--font-size-xlarge);
-      max-width: 90%;
-    }
-
-    .steps .left p {
-      font-size: var(--font-size-medium);
-      max-width: 90%;
-      line-height: 1.5em;
-      margin: 0;
-    }
-
-    .list {
-      width: 90%;
-      justify-content: center;
-      margin-top: 5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .steps .right {
-      width: 100%;
-      min-height: 50vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .steps .right img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .process__layout { grid-template-columns: 1fr; }
+    .process__intro { position: static !important; transform: none !important; }
+    .step { min-height: 68rem; }
   }
 
-  @media (max-width: 425px) {
-    .list {
-      margin-top: 5rem;
-    }
-    .list ul li {
-      font-size: 1.2rem;
-    }
+  @media (max-width: 600px) {
+    .step { min-height: 56rem; }
   }
 </style>
-
-<script>
-import gsap from "gsap";
-import ScrollTrigger from "gsap/src/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.utils.toArray(".steps").forEach((step, i) => {
-    ScrollTrigger.create({
-      trigger: step as HTMLElement,
-      start: "top top",
-      end: "+=100%",
-      pin: true,
-      pinSpacing: false,
-      markers: false,
-  });
-});
-</script>

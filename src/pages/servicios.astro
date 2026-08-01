@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import OurProcess from "../components/index/OurProcess.astro";
+import Button from "../components/atoms/Button.astro";
+
+const services = [
+  { icon: "ph-film-slate", title: "Producción integral", text: "Estrategia, concepto, guion, equipo, rodaje y entrega coordinados desde una única visión.", className: "service--wide" },
+  { icon: "ph-camera", title: "Dirección y fotografía", text: "Construcción visual, puesta en escena y luz para que cada plano tenga intención.", className: "service--side" },
+  { icon: "ph-scissors", title: "Postproducción", text: "Montaje, color, sonido y grafismo con el ritmo exacto que pide cada pieza.", className: "service--third" },
+  { icon: "ph-music-notes", title: "Videoclips", text: "Conceptos visuales que expanden el universo del artista sin competir con la música.", className: "service--third" },
+  { icon: "ph-megaphone", title: "Contenido de marca", text: "Campañas y piezas digitales que equilibran identidad, claridad y capacidad de conversión.", className: "service--third" },
+];
+---
+
+<Layout title="Servicios — Golden Era" description="Producción audiovisual integral, dirección, videoclips, postproducción y contenido de marca.">
+  <PageHero
+    eyebrow="Producción sin compartimentos"
+    title="Todo lo que una idea"
+    accent="necesita para vivir."
+    description="Nos adaptamos al tamaño de la historia, no al revés. Desde una pieza ágil hasta una producción completa."
+    image="/images/OurCamera.png"
+    actionHref="#servicios"
+    actionText="Ver capacidades"
+  />
+
+  <section class="capabilities chapter" id="servicios">
+    <div class="shell capabilities__head">
+      <p class="eyebrow">Capacidades</p>
+      <h2 class="section-title">Un equipo compacto. <span class="editorial text-gold">Una mirada completa.</span></h2>
+    </div>
+
+    <div class="service-bento shell">
+      {services.map((service) => (
+        <article class:list={["service-card", service.className]}>
+          <i class:list={["ph", service.icon]} aria-hidden="true"></i>
+          <div>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+          </div>
+          <span aria-hidden="true"><i class="ph ph-arrow-up-right"></i></span>
+        </article>
+      ))}
+    </div>
+
+    <div class="capabilities__action shell">
+      <p>Si no encaja en una categoría, probablemente nos interese todavía más.</p>
+      <Button href="/contacto" text="Cuéntanos el reto" />
+    </div>
+  </section>
+
+  <OurProcess />
+</Layout>
+
+<style>
+  .capabilities__head { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: end; margin-bottom: clamp(5rem, 8vw, 10rem); }
+  .service-bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: dense; grid-auto-rows: minmax(28rem, auto); gap: 1rem; }
+  .service-card { position: relative; display: flex; min-height: 32rem; justify-content: space-between; flex-direction: column; padding: clamp(2.4rem, 4vw, 5rem); overflow: hidden; border: 1px solid var(--color-line); border-radius: var(--radius-sm); background: var(--color-surface); transition: background 360ms ease, color 360ms ease, transform 360ms var(--ease-out); }
+  .service--wide { grid-column: span 7; }
+  .service--side { grid-column: span 5; }
+  .service--third { grid-column: span 4; }
+  .service-card > i { color: var(--color-gold); font-size: clamp(3rem, 4vw, 5rem); }
+  .service-card h3 { max-width: 100%; overflow-wrap: break-word; hyphens: auto; font-size: clamp(3.2rem, 3.2vw, 5.4rem); letter-spacing: -0.05em; line-height: 0.95; text-wrap: wrap; }
+  .service-card p { max-width: 38ch; margin-top: 1.6rem; color: var(--color-text-muted); }
+  .service-card > span { position: absolute; top: 2.4rem; right: 2.4rem; font-size: 2rem; opacity: 0; transform: translate(-1rem, 1rem); transition: opacity 260ms ease, transform 260ms var(--ease-out); }
+  .service-card:hover { background: var(--color-gold); color: var(--color-ink); transform: translateY(-4px); }
+  .service-card:hover > i, .service-card:hover p { color: var(--color-ink); }
+  .service-card:hover > span { opacity: 1; transform: translate(0); }
+  .capabilities__action { display: flex; align-items: center; justify-content: space-between; gap: 3rem; margin-top: 4rem; }
+  .capabilities__action p { max-width: 42ch; color: var(--color-text-muted); }
+  @media (max-width: 1100px) and (min-width: 801px) { .service--third { grid-column: span 6; } }
+  @media (max-width: 800px) { .capabilities__head { grid-template-columns: 1fr; } .service-bento { grid-template-columns: 1fr; } .service--wide, .service--side, .service--third { grid-column: 1; } .capabilities__action { align-items: flex-start; flex-direction: column; } }
+</style>

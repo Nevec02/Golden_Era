@@ -1,57 +1,124 @@
 ---
-import Button from "../atoms/Button.astro";
+const statements = [
+  { quote: "Que una marca se vea como siempre quiso sentirse.", area: "Dirección creativa" },
+  { quote: "Que una canción siga sonando incluso con el volumen a cero.", area: "Videoclip" },
+  { quote: "Que una historia pequeña ocupe toda la pantalla.", area: "Cine" },
+];
 ---
 
-<section>
-  <div class="work-now">
-    <h2>Contacta con nosotros</h2>
-    <p>
-      ¿Tienes una idea para una nueva experiencia? ¿Quieres colaborar con
-      nosotros? ¿Quieres conocer más sobre nuestro trabajo? ¡Nos encantaría
-      escuchar tus ideas!
-    </p>
-    <Button href="/contactenos" text="Contáctanos" />
+<section class="statements chapter">
+  <div class="shell">
+    <p class="eyebrow">Lo que buscamos provocar</p>
+    <div class="carousel" aria-live="polite">
+      {statements.map((statement, index) => (
+        <article class:list={["carousel__slide", { "is-active": index === 0 }]}>
+          <blockquote>“{statement.quote}”</blockquote>
+          <p>{statement.area}</p>
+        </article>
+      ))}
+    </div>
+    <div class="carousel__controls">
+      <button type="button" data-direction="prev" aria-label="Declaración anterior"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
+      <span><strong class="carousel__current">01</strong> / 03</span>
+      <button type="button" data-direction="next" aria-label="Declaración siguiente"><i class="ph ph-arrow-right" aria-hidden="true"></i></button>
+    </div>
   </div>
 </section>
 
 <style>
+  .statements {
+    text-align: center;
+  }
 
-  .work-now {
+  .carousel {
+    position: relative;
+    display: grid;
+    min-height: clamp(30rem, 42vw, 56rem);
+    place-items: center;
+    margin-top: 4rem;
+  }
+
+  .carousel__slide {
+    grid-area: 1 / 1;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(3rem);
+    transition: opacity 500ms ease, transform 500ms var(--ease-out), visibility 500ms;
+  }
+
+  .carousel__slide.is-active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  blockquote {
+    max-width: 18ch;
+    margin: 0 auto;
+    font-family: var(--font-display);
+    font-size: clamp(4.8rem, 8vw, 12rem);
+    font-weight: 650;
+    letter-spacing: -0.06em;
+    line-height: 0.9;
+  }
+
+  .carousel__slide p {
+    margin-top: 3rem;
+    color: var(--color-gold);
+    font-size: 1.3rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .carousel__controls {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5rem;
-    padding: 0 5rem;
-  }
-  .work-now h2 {
-    font-size: clamp(var(--font-size-medium), 15vw, var(--font-size-bigger));
-    color: var(--color-primary-500);
-    margin: 0 0 var(--margin-large) 0;
-    padding: 0;
-  }
-  .work-now p {
-    font-size: var(--font-size-xlarge);
-    color: var(--color-white);
-    width: 80%;
-    margin: 0;
-    padding: 0;
-    line-height: 5.5rem;
+    gap: 2rem;
   }
 
-  @media (max-width: 900px) {
-    .work-now {
-      padding: 0 0 0 1.5rem;
-    }
-    .work-now p {
-      width: 95%;
-    }
+  .carousel__controls button {
+    display: grid;
+    width: 5rem;
+    height: 5rem;
+    place-items: center;
+    border: 1px solid var(--color-line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: background 200ms ease, color 200ms ease;
   }
 
-  @media (max-width: 465px) {
-    .work-now p {
-        font-size: var(--font-size-medium);
-    }
-      
+  .carousel__controls button:hover {
+    background: var(--color-gold);
+    color: var(--color-ink);
   }
+
+  .carousel__controls span {
+    min-width: 6rem;
+    color: var(--color-text-muted);
+    font-size: 1.2rem;
+  }
+
+  .carousel__current { color: var(--color-gold); }
 </style>
+
+<script>
+  const slides = Array.from(document.querySelectorAll<HTMLElement>(".carousel__slide"));
+  const current = document.querySelector<HTMLElement>(".carousel__current");
+  let activeIndex = 0;
+
+  document.querySelectorAll<HTMLButtonElement>(".carousel__controls button").forEach((button) => {
+    button.addEventListener("click", () => {
+      slides[activeIndex]?.classList.remove("is-active");
+      activeIndex = button.dataset.direction === "next"
+        ? (activeIndex + 1) % slides.length
+        : (activeIndex - 1 + slides.length) % slides.length;
+      slides[activeIndex]?.classList.add("is-active");
+      if (current) current.textContent = String(activeIndex + 1).padStart(2, "0");
+    });
+  });
+</script>

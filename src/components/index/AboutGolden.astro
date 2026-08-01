@@ -1,192 +1,169 @@
----
-import Button from "../atoms/Button.astro";
----
-
-<section>
-  <div class="about-golden">
-    <div class="marquee">
-      <div>
-        <p class="marquee-item">What is Golden Era?</p>
-        <p class="marquee-item">What is Golden Era?</p>
-        <p class="marquee-item">What is Golden Era?</p>
-      </div>
-      <div aria-hidden="true">
-        <p class="marquee-item">What is Golden Era?</p>
-        <p class="marquee-item">What is Golden Era?</p>
-        <p class="marquee-item">What is Golden Era?</p>
-      </div>
+<section class="manifesto chapter" id="manifiesto">
+  <div class="marquee" aria-label="Formatos audiovisuales">
+    <div class="marquee__track">
+      <span>Cortometrajes</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Videoclips</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Branded content</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Dirección creativa</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Cortometrajes</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Videoclips</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Branded content</span><i class="ph ph-asterisk" aria-hidden="true"></i>
+      <span>Dirección creativa</span>
     </div>
-    <div class="about-era">
-      <hr class="about-hr" />
-      <div class="about-content">
-        <p>
-          En Golden Era se han realizado proyectos innovadores que responden a
-          las necesidades de nuestros clientes y a los deseos de su audiencia.
-        </p>
-        <p>
-          Nos gusta decir que convertimos lo salvaje, ambicioso y experimental
-          en realidad, pero puedes ser tú quien lo juzgue. Generamos engagement,
-          comprensión y acción en cada experiencia que creamos.
-        </p>
-        <Button href="/contacto" text="Contacta" />
-      </div>
+  </div>
+
+  <div class="manifesto__body shell">
+    <video class="manifesto__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="/videos/GoldenBackgroundSlow.webm" type="video/webm" />
+    </video>
+    <div class="manifesto__veil" aria-hidden="true"></div>
+
+    <div class="manifesto__copy">
+      <p class="eyebrow">Golden Era no es solo una productora</p>
+      <p class="manifesto__statement js-scrub-copy">
+        Convertimos ideas salvajes en imágenes precisas. Unimos estrategia,
+        oficio y riesgo para crear historias que merecen ser vistas.
+      </p>
+    </div>
+
+    <div class="manifesto__facts">
+      <div><strong>360º</strong><span>Del concepto a la entrega final</span></div>
+      <div><strong>01</strong><span>Un equipo, una visión, un resultado</span></div>
+      <div><strong>∞</strong><span>Formas de contar la historia</span></div>
     </div>
   </div>
 </section>
 
 <style>
-  .about-golden {
-    position: relative;
-    height: 85rem;
-  }
-  .about-era {
-    position: absolute;
-    top: 30rem;
-    display: flex;
-    justify-content: end;
-    gap: 4rem;
-    width: 100%;
-  }
-  .about-hr {
-    width: 15rem;
-    height: 0;
-    margin: 1.5rem 0 0 0;
-    border: 1px solid var(--color-primary-500);
-  }
-
-  .about-content {
-    display: flex;
-    flex-direction: column;
-    padding-right: clamp(2.5rem, 10%, 10rem);
-    gap: 2rem;
-    width: 30%;
-  }
-
-  .about-content p {
-    margin: 0;
-    font-size: var(--font-size-large);
-    color: var(--color-white);
-    line-height: 4rem;
+  .manifesto {
+    padding-top: 0;
   }
 
   .marquee {
-    overflow: clip;
-    user-select: none;
-    --gap: 80px;
-    display: flex;
-    gap: var(--gap);
+    overflow: hidden;
+    border-block: 1px solid var(--color-line);
+    background: var(--color-gold);
+    color: var(--color-ink);
   }
-  .marquee div {
-    flex-shrink: 0;
-    min-width: 100%;
+
+  .marquee__track {
     display: flex;
-    justify-content: space-between;
+    width: max-content;
     align-items: center;
-    gap: var(--gap);
-
-    animation: scroll 80s linear infinite;
+    gap: 2.4rem;
+    padding-block: 1.5rem;
+    animation: marquee 34s linear infinite;
   }
 
-  .marquee div p {
-    font-size: clamp(15rem, 20vw, 50rem);
-
+  .marquee span {
+    font-size: clamp(2rem, 2.2vw, 3.4rem);
+    font-weight: 760;
+    letter-spacing: -0.035em;
     text-transform: uppercase;
-    letter-spacing: -1rem;
-    font-family: "NewTitle";
-    color: var(--color-primary-500);
-    filter: opacity(0.2);
-    margin: 0;
   }
 
-  /*  .marquee:hover div {
-    animation-play-state: paused;
-  } */
-
-  @keyframes scroll {
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
-    }
+  .marquee i {
+    font-size: 2rem;
   }
 
-  @media (max-width: 1800px) {
-    .about-era {
-      top: 25rem;
-    }
+  .manifesto__body {
+    position: relative;
+    overflow: hidden;
+    min-height: min(98rem, 92vh);
+    padding: clamp(7rem, 10vw, 14rem) var(--gutter) 0;
+    border-radius: var(--radius-lg);
+    isolation: isolate;
   }
 
-  @media (max-width: 1500px) {
-    .about-era {
-      top: 20rem;
-    }
+  .manifesto__video,
+  .manifesto__veil {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  @media (max-width: 1100px) {
-    .about-era {
-      justify-content: flex-start;
-      top: 10rem;
-    }
-
-    .about-hr {
-      margin-left: 1.2rem;
-      margin-top: 1.5rem;
-    }
-
-    .about-content {
-      width: 100%;
-      padding-right: 1rem;
-    }
-
-    .about-content p{
-        width: 80%;
-    }
+  .manifesto__video {
+    object-fit: cover;
+    filter: saturate(0.72) contrast(1.08);
   }
 
-  @media (max-width: 768px) {
-    .about-golden {
-      height: 45rem;
-    }
-
-    .about-era {
-      top: 10rem;
-      gap: 2rem;
-    }
-    .about-hr {
-      margin-left: 1rem;
-      width: 10rem;
-      margin-top: 1rem;
-    }
-
-    .about-content p {
-      font-size: var(--font-size-medium);
-      line-height: normal;
-    }
-
-    .marquee div p {
-      letter-spacing: normal;
-    }
+  .manifesto__veil {
+    z-index: -1;
+    background:
+      linear-gradient(90deg, rgba(9, 7, 2, 0.92) 0%, rgba(9, 7, 2, 0.67) 58%, rgba(9, 7, 2, 0.25) 100%),
+      linear-gradient(0deg, rgba(9, 7, 2, 0.92) 0%, transparent 52%);
   }
 
-  @media (max-width: 600px) {
-
-    .about-hr {
-      margin-left: 0.5rem;
-      width: 5rem;
-    }
-
-    .marquee div {
-      animation: scroll 30s linear infinite;
-    }
+  .manifesto__copy {
+    position: relative;
+    z-index: 1;
   }
 
-  @media (max-width: 400px) {
-    .about-golden {
-      height: 50rem;
-    }
+  .manifesto__statement {
+    max-width: 22ch;
+    margin-top: clamp(4rem, 7vw, 9rem);
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 6.7vw, 10rem);
+    font-weight: 650;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
   }
 
-  @media (max-width: 340px) {
-    .about-golden {
-      height: 60rem;
+  .manifesto__facts {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: clamp(7rem, 9vw, 12rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+  }
+
+  .manifesto__facts div {
+    display: flex;
+    min-height: 18rem;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2.4rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.24);
+  }
+
+  .manifesto__facts div:last-child {
+    border-right: 0;
+  }
+
+  .manifesto__facts strong {
+    color: var(--color-gold);
+    font-size: clamp(4rem, 6vw, 8rem);
+    line-height: 1;
+  }
+
+  .manifesto__facts span {
+    max-width: 24ch;
+    color: var(--color-text-muted);
+  }
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+
+  @media (max-width: 767px) {
+    .manifesto__facts {
+      grid-template-columns: 1fr;
     }
+
+    .manifesto__facts div {
+      min-height: 13rem;
+      border-right: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .manifesto__body { min-height: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track { animation: none; }
   }
 </style>

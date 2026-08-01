@@ -1,40 +1,71 @@
 ---
-const { href, text, type } = Astro.props;
+interface Props {
+  href: string;
+  text: string;
+  type?: "primary" | "secondary" | "ink";
+  icon?: string;
+}
+
+const { href, text, type = "primary", icon = "ph-arrow-up-right" } = Astro.props;
 ---
 
-<a href={href} class={`button ${type}`}>{text}</a>
+<a href={href} class:list={["button", `button--${type}`]}>
+  <span>{text}</span>
+  <i class:list={["ph", icon]} aria-hidden="true"></i>
+</a>
 
 <style>
-    .button {
-        display: inline-block;
-        width: fit-content;
-        padding: 1rem 2rem;
-        border-radius: 1.8rem;
-        text-decoration: none;
-        font-size: var(--font-size-medium);
-        color: var(--color-black);
-        background-color: var(--color-primary-500);
-        transition: background-color 0.3s ease-out;
-    }
+  .button {
+    display: inline-flex;
+    min-height: 5rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    width: fit-content;
+    padding: 1.2rem 2.4rem;
+    border: 1px solid var(--color-gold);
+    border-radius: 999px;
+    color: var(--color-ink);
+    background: var(--color-gold);
+    font-size: 1.5rem;
+    font-weight: 720;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: transform 240ms var(--ease-out), background 240ms ease, color 240ms ease;
+  }
 
-    .button:hover {
-        background-color: var(--color-black);
-        color: var(--color-primary-500);
-    }
+  .button i {
+    font-size: 1.9rem;
+    transition: transform 240ms var(--ease-out);
+  }
 
-    .black {
-        background-color: var(--color-black);
-        color: var(--color-primary-500);
-    }
+  .button:hover {
+    transform: translateY(-3px);
+    background: var(--color-gold-light);
+  }
 
-    .black:hover {
-        background-color: var(--color-primary-500);
-        color: var(--color-black);
-    }
+  .button:hover i {
+    transform: translate(0.2rem, -0.2rem);
+  }
 
-    @media (max-width: 768px) {
-        .button{
-            font-size: var(--font-size-sm);
-        }
-    }
+  .button--secondary {
+    color: var(--color-text-soft);
+    background: transparent;
+  }
+
+  .button--secondary:hover {
+    color: var(--color-ink);
+    background: var(--color-gold);
+  }
+
+  .button--ink {
+    border-color: var(--color-ink);
+    color: var(--color-gold);
+    background: var(--color-ink);
+  }
+
+  .button--ink:hover {
+    color: var(--color-ink);
+    background: transparent;
+  }
 </style>

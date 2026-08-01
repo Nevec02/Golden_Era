@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+---
+
+<Layout title="Contacto — Golden Era" description="Cuéntanos tu proyecto audiovisual y empecemos a darle forma.">
+  <PageHero
+    eyebrow="Una conversación puede ser el primer plano"
+    title="Tienes una idea."
+    accent="Vamos a moverla."
+    description="Cuéntanos qué quieres provocar, dónde debe vivir la pieza y cuándo te gustaría verla hecha realidad."
+    image="/images/OurCamera.png"
+    actionHref="#formulario"
+    actionText="Escribir el brief"
+  />
+
+  <section class="contact chapter" id="formulario">
+    <div class="shell contact__grid">
+      <div class="contact__aside">
+        <p class="eyebrow">Hablemos claro</p>
+        <h2 class="section-title">La primera toma <span class="editorial text-gold">empieza aquí.</span></h2>
+        <div class="contact__details">
+          <a href="mailto:servicios@goldenera.es"><i class="ph ph-envelope-simple" aria-hidden="true"></i> servicios@goldenera.es</a>
+          <span><i class="ph ph-map-pin" aria-hidden="true"></i> Gijón, Asturias</span>
+          <span><i class="ph ph-clock" aria-hidden="true"></i> Respuesta en 1–2 días laborables</span>
+        </div>
+      </div>
+
+      <form class="contact-form">
+        <div class="field"><label for="name">Nombre</label><input id="name" name="name" type="text" autocomplete="name" required placeholder="Cómo te llamas" /></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="tu@email.com" /></div>
+        <div class="field field--full"><label for="project">¿Qué tienes entre manos?</label><select id="project" name="project" required><option value="">Selecciona un tipo de proyecto</option><option>Cortometraje</option><option>Videoclip</option><option>Contenido de marca</option><option>Evento o instalación</option><option>Otra idea</option></select></div>
+        <div class="field"><label for="budget">Presupuesto aproximado</label><select id="budget" name="budget"><option value="Por definir">Por definir</option><option>Hasta 3.000 €</option><option>3.000–8.000 €</option><option>8.000–20.000 €</option><option>Más de 20.000 €</option></select></div>
+        <div class="field"><label for="date">Fecha ideal</label><input id="date" name="date" type="text" placeholder="Mes / año" /></div>
+        <div class="field field--full"><label for="message">La idea</label><textarea id="message" name="message" rows="7" required placeholder="Contexto, objetivo, referencias y cualquier detalle que nos ayude a verla contigo."></textarea></div>
+        <button type="submit"><span>Enviar proyecto</span><i class="ph ph-paper-plane-tilt" aria-hidden="true"></i></button>
+        <p class="contact-form__note">Al enviar se abrirá tu aplicación de correo con el mensaje preparado para Golden Era.</p>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact { background: var(--color-text-soft); color: var(--color-ink); }
+  .contact__grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(5rem, 9vw, 14rem); }
+  .contact .eyebrow, .contact .text-gold { color: var(--color-gold-dark); }
+  .contact__aside h2 { margin-top: 2.4rem; }
+  .contact__details { display: grid; gap: 1.2rem; margin-top: 5rem; }
+  .contact__details a, .contact__details span { display: flex; align-items: center; gap: 1rem; color: var(--color-ink); text-decoration: none; }
+  .contact__details i { font-size: 2rem; }
+  .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem 1.6rem; }
+  .field { display: grid; gap: 0.8rem; }
+  .field--full { grid-column: 1 / -1; }
+  label { font-size: 1.3rem; font-weight: 740; letter-spacing: 0.04em; text-transform: uppercase; }
+  input, select, textarea { width: 100%; border: 0; border-bottom: 1px solid rgba(14, 11, 2, 0.42); border-radius: 0; padding: 1.4rem 0; background: transparent; color: var(--color-ink); outline: 0; }
+  input:focus, select:focus, textarea:focus { border-bottom-color: var(--color-gold-dark); box-shadow: 0 1px 0 var(--color-gold-dark); }
+  textarea { resize: vertical; }
+  option { background: var(--color-text-soft); }
+  button { grid-column: 1 / -1; display: flex; min-height: 6.2rem; align-items: center; justify-content: space-between; padding: 1.4rem 2rem; border: 1px solid var(--color-ink); border-radius: 999px; background: var(--color-ink); color: var(--color-gold); cursor: pointer; font-weight: 760; transition: background 220ms ease, color 220ms ease; }
+  button:hover { background: var(--color-gold); color: var(--color-ink); }
+  button i { font-size: 2.2rem; }
+  .contact-form__note { grid-column: 1 / -1; font-size: 1.3rem; opacity: 0.72; }
+  @media (max-width: 800px) { .contact__grid, .contact-form { grid-template-columns: 1fr; } .field--full, button, .contact-form__note { grid-column: 1; } }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>(".contact-form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const subject = `Nuevo proyecto: ${data.get("project") || "Consulta audiovisual"}`;
+    const body = [
+      `Nombre: ${data.get("name")}`,
+      `Email: ${data.get("email")}`,
+      `Tipo de proyecto: ${data.get("project")}`,
+      `Presupuesto: ${data.get("budget")}`,
+      `Fecha ideal: ${data.get("date") || "Por definir"}`,
+      "",
+      String(data.get("message") || ""),
+    ].join("\n");
+    window.location.href = `mailto:servicios@goldenera.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>

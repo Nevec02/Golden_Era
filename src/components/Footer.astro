@@ -1,153 +1,191 @@
 ---
-import { Image } from "astro:assets";
-import FooterLogo from "../assets/logos/sideblack.svg";
+import Button from "./atoms/Button.astro";
 
-import Button from "../components/atoms/Button.astro";
+const year = new Date().getFullYear();
 ---
 
-<footer data-section="footer" id="footer">
-  <div class="footer-container">
-    <div class="footer-head">
-      <h2>DISEÑO Y PRODUCCIÓN AUDIOVISUAL</h2>
-      <Button href="/contacto" type="button black" text="Contacta" />
+<footer class="footer" id="footer">
+  <div class="footer__cta shell">
+    <div>
+      <p class="eyebrow footer__eyebrow">El siguiente plano empieza aquí</p>
+      <h2>¿Rodamos <span class="editorial">algo grande?</span></h2>
     </div>
-    <hr />
-    <div class="footer-body">
-      <div class="footer-column">
-        <h3>Index</h3>
-        <ul class="footer-list">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/servicios">Servicios</a></li>
-          <li><a href="/proyectos">Proyectos</a></li>
-          <li><a href="/sobre-nosotros">Sobre nosotros</a></li>
-          <li><a href="/contacto">Contacto</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Social media</h3>
-        <ul class="footer-list">
-          <li><a href="https://www.instagram.com/goldenera_studios?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          <li><a href="https://www.youtube.com/@GoldenEraStudios" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-          <li><a href="https://www.facebook.com/people/Golden-Era/61569511384557/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h3>Stuff</h3>
-        <ul class="footer-list">
-          <li><a href="/gijon-impulsa">Gijón Impulsa</a></li>
-          <li><a href="/terminos-y-condiciones">Terminos y condiciones</a></li>
-          <li><a href="/politica-de-privacidad">Política de privacidad</a></li>
-          <li><a href="/cookies">Cookies</a></li>
-        </ul>
-      </div>
+    <Button href="/contacto" type="ink" text="Cuéntanos tu idea" icon="ph-paper-plane-tilt" />
+  </div>
+
+  <div class="footer__meta shell">
+    <div class="footer__brand">
+      <img src="/images/sideGoldenera.svg" alt="Golden Era" width="260" height="72" />
+      <p>Producción audiovisual con base en Asturias.</p>
     </div>
-    <div class="footer-logo">
-      <Image src={FooterLogo} alt="Golden Era Logo" width="1400" height="300" loading={"eager"} />
+
+    <nav aria-label="Enlaces del pie">
+      <a href="/proyectos">Proyectos</a>
+      <a href="/servicios">Servicios</a>
+      <a href="/sobre-nosotros">Estudio</a>
+      <a href="/contacto">Contacto</a>
+    </nav>
+
+    <div class="footer__socials">
+      <a href="https://www.instagram.com/goldenera_studios" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="ph ph-instagram-logo" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.youtube.com/@GoldenEraStudios" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <i class="ph ph-youtube-logo" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.facebook.com/people/Golden-Era/61569511384557/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <i class="ph ph-facebook-logo" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
+
+  <div class="footer__legal shell">
+    <span>© {year} Golden Era</span>
+    <span>Gijón, Asturias</span>
+    <a href="mailto:servicios@goldenera.es">servicios@goldenera.es</a>
+  </div>
+
+  <p class="footer__wordmark" aria-hidden="true">GOLDEN ERA</p>
 </footer>
 
 <style>
-  footer {
+  .footer {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(8rem, 12vw, 16rem) 0 2rem;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  .footer__cta {
     display: flex;
-    justify-content: center;
-    background-color: var(--color-primary-500);
-    border-radius: var(--border-radius);
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4rem;
+    padding-bottom: clamp(7rem, 10vw, 13rem);
   }
 
-  footer h2 {
-    color: var(--color-black);
-    font-size: var(--font-size-large);
-    max-width: 20ch;
-    margin: 0;
+  .footer__eyebrow {
+    color: var(--color-ink);
   }
 
-  footer h3 {
-    color: var(--color-black);
+  h2 {
+    max-width: 10ch;
+    margin-top: 2rem;
+    font-size: clamp(5.2rem, 9vw, 14rem);
+    font-weight: 760;
+    letter-spacing: -0.065em;
+    line-height: 0.84;
     text-transform: uppercase;
-    font-weight: bold;
-    margin: 0;
   }
 
-  footer ul {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--margin-small);
+  h2 span {
+    display: block;
+    text-transform: none;
   }
 
-  footer ul li a:hover {
-    color: var(--color-white);
-    cursor: pointer;
+  .footer__meta {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr auto;
+    gap: 5rem;
+    align-items: start;
+    padding-block: 3rem;
+    border-top: 1px solid rgba(14, 11, 2, 0.38);
   }
 
-  footer ul li a:focus {
-    color: var(--color-white);
-    cursor: pointer;
+  .footer__brand img {
+    width: min(24rem, 100%);
+    filter: brightness(0);
   }
 
-  .footer-container ul li a {
-    color: var(--color-black);
+  .footer__brand p {
+    max-width: 30ch;
+    margin-top: 1.8rem;
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 3rem;
+  }
+
+  nav a,
+  .footer__legal a {
+    font-weight: 620;
     text-decoration: none;
   }
 
-  hr {
-    margin: 3.4rem 0;
-    border: 1px solid var(--color-black);
+  nav a:hover,
+  .footer__legal a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.4rem;
   }
 
-  .footer-container {
-    width: 80%;
-  }
-
-  .footer-head {
+  .footer__socials {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: var(--margin-xlarge);
-    margin-bottom: var(--margin-medium);
+    gap: 0.8rem;
   }
 
-  .footer-body {
+  .footer__socials a {
+    display: grid;
+    width: 4.8rem;
+    height: 4.8rem;
+    place-items: center;
+    border: 1px solid var(--color-ink);
+    border-radius: 50%;
+    font-size: 2.2rem;
+    text-decoration: none;
+    transition: background 200ms ease, color 200ms ease, transform 200ms var(--ease-out);
+  }
+
+  .footer__socials a:hover {
+    background: var(--color-ink);
+    color: var(--color-gold);
+    transform: translateY(-3px);
+  }
+
+  .footer__legal {
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
+    padding-block: 2rem;
+    border-top: 1px solid rgba(14, 11, 2, 0.38);
+    font-size: 1.3rem;
+    font-weight: 650;
+    text-transform: uppercase;
+  }
+
+  .footer__wordmark {
     width: 100%;
-    margin-top: var(--margin-medium);
-    margin-bottom: var(--margin-xxlarge);
+    margin: 4rem 0 0;
+    padding: 0 0 0.08em;
+    font-family: var(--font-display);
+    font-size: clamp(4.4rem, 14.8vw, 25rem);
+    font-weight: 850;
+    letter-spacing: -0.085em;
+    line-height: 0.78;
+    text-align: center;
+    white-space: nowrap;
   }
 
-  .footer-list{
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+  @media (max-width: 767px) {
+    .footer__cta {
+      align-items: flex-start;
+      flex-direction: column;
+    }
 
-  .footer-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: var(--margin-large);
-  }
+    h2 {
+      font-size: clamp(5rem, 16vw, 8rem);
+    }
 
-  @media (max-width: 768px) {
-      .footer-head{
-          flex-direction: column;
-          align-items: start;
-          gap: 2rem;
-      }
+    .footer__meta {
+      grid-template-columns: 1fr;
+    }
 
-      .footer-body{
-          flex-direction: column;
-          gap: 2rem;
-          margin-bottom: var(--margin-large);
-      }
-
-      .footer-logo{
-          margin-bottom: var(--margin-medium);
-      }
-
-      .footer-logo img{
-          height: 100px;
-      }
+    .footer__legal {
+      align-items: flex-start;
+      flex-direction: column;
+    }
   }
 </style>

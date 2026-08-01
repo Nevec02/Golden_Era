@@ -1,0 +1,121 @@
+---
+import Button from "./atoms/Button.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent: string;
+  description: string;
+  image?: string;
+  video?: string;
+  actionHref?: string;
+  actionText?: string;
+  imageFocus?: "center" | "faces";
+}
+
+const {
+  eyebrow,
+  title,
+  accent,
+  description,
+  image = "/images/ProjectPhoto_calvinklein.png",
+  video,
+  actionHref = "/contacto",
+  actionText = "Hablemos",
+  imageFocus = "center",
+} = Astro.props;
+---
+
+<section class:list={["page-hero", { "page-hero--faces": imageFocus === "faces" }]}>
+  <div class="page-hero__media" aria-hidden="true">
+    {video ? (
+      <video autoplay muted loop playsinline preload="metadata" poster={image}>
+        <source src={video} type="video/webm" />
+      </video>
+    ) : (
+      <img class="js-parallax" src={image} alt="" />
+    )}
+  </div>
+  <div class="page-hero__shade" aria-hidden="true"></div>
+  <div class="page-hero__content shell">
+    <p class="eyebrow js-hero-reveal">{eyebrow}</p>
+    <h1 class="js-hero-reveal">{title} <span class="editorial text-gold">{accent}</span></h1>
+    <div class="page-hero__bottom js-hero-reveal">
+      <p>{description}</p>
+      <Button href={actionHref} text={actionText} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    display: grid;
+    min-height: 92svh;
+    align-items: end;
+    overflow: hidden;
+    padding: 18rem 0 7rem;
+    isolation: isolate;
+  }
+
+  .page-hero__media,
+  .page-hero__shade {
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+  }
+
+  .page-hero__media img,
+  .page-hero__media video {
+    width: 100%;
+    height: 112%;
+    object-fit: cover;
+    filter: saturate(0.5) contrast(1.15) brightness(0.64);
+  }
+
+  .page-hero--faces .page-hero__media img {
+    object-position: 50% 35%;
+  }
+
+  .page-hero__shade {
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(14, 11, 2, 0.35), transparent 34%, rgba(14, 11, 2, 0.95)),
+      linear-gradient(90deg, rgba(14, 11, 2, 0.72), transparent 72%);
+  }
+
+  h1 {
+    max-width: 14ch;
+    margin-top: 3rem;
+    font-size: clamp(6rem, 11vw, 17rem);
+    font-weight: 760;
+    letter-spacing: -0.07em;
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  h1 span {
+    display: block;
+    text-transform: none;
+  }
+
+  .page-hero__bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4rem;
+    margin-top: clamp(5rem, 8vw, 10rem);
+  }
+
+  .page-hero__bottom p {
+    max-width: 55ch;
+    color: var(--color-text-soft);
+    font-size: clamp(1.8rem, 1.4rem + 0.6vw, 2.5rem);
+  }
+
+  @media (max-width: 767px) {
+    .page-hero { min-height: 86svh; padding-top: 14rem; }
+    h1 { font-size: clamp(5.4rem, 18vw, 9rem); }
+    .page-hero__bottom { align-items: flex-start; flex-direction: column; }
+  }
+</style>

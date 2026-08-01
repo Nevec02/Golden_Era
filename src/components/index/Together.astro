@@ -2,10 +2,10 @@
 import Button from "../atoms/Button.astro";
 
 const services = [
-  { title: "Cine", text: "Cortometrajes y piezas narrativas donde cada plano empuja la historia.", image: "/images/Shortfilm_EsRetina.webp", icon: "ph-film-strip" },
-  { title: "Videoclips", text: "Universos visuales para artistas que quieren sonar también con los ojos.", image: "/images/Shortfilm_firmadoWilson.png", icon: "ph-music-notes" },
-  { title: "Marcas", text: "Campañas, producto y contenido que traduce estrategia en deseo.", image: "/images/ProjectPhoto_calvinklein.png", icon: "ph-megaphone" },
-  { title: "Experimental", text: "Motion, instalaciones y formatos que todavía no tienen una etiqueta cómoda.", image: "/images/Shortfilm_theHive.png", icon: "ph-sparkle" },
+  { title: "Cine", text: "Cortometrajes y piezas narrativas donde cada plano empuja la historia.", image: "/images/golden-era-service-cine.png", icon: "ph-film-strip" },
+  { title: "Videoclips", text: "Universos visuales para artistas que quieren sonar también con los ojos.", image: "/images/golden-era-service-videoclips.png", icon: "ph-music-notes" },
+  { title: "Marcas", text: "Campañas, producto y contenido que traduce estrategia en deseo.", image: "/images/golden-era-service-marcas.png", icon: "ph-megaphone" },
+  { title: "Experimental", text: "Motion, instalaciones y formatos que todavía no tienen una etiqueta cómoda.", image: "/images/golden-era-service-experimental.png", icon: "ph-sparkle" },
 ];
 ---
 
@@ -19,7 +19,7 @@ const services = [
     <div class="service-stage__visuals" aria-live="polite">
       {services.map((service, index) => (
         <figure class:list={["service-visual", { "is-active": index === 0 }]} data-service-visual={index}>
-          <img src={service.image} alt={`Fotograma del servicio ${service.title}`} loading={index === 0 ? "eager" : "lazy"} />
+          <img src={service.image} alt={`Dirección visual para el servicio ${service.title}`} loading={index === 0 ? "eager" : "lazy"} decoding="async" />
           <figcaption><span>0{index + 1}</span>{service.title}</figcaption>
         </figure>
       ))}

@@ -20,13 +20,24 @@ const services = [
       {services.map((service, index) => (
         <figure class:list={["service-visual", { "is-active": index === 0 }]} data-service-visual={index}>
           <img src={service.image} alt={`Dirección visual para el servicio ${service.title}`} loading={index === 0 ? "eager" : "lazy"} decoding="async" />
-          <figcaption><span>0{index + 1}</span>{service.title}</figcaption>
+          <figcaption>
+            <span class="service-visual__index">0{index + 1}</span>
+            <span class="service-visual__copy">
+              <strong>{service.title}</strong>
+              <small>{service.text}</small>
+            </span>
+          </figcaption>
         </figure>
       ))}
+      <button class="service-stage__autoplay" type="button" data-service-autoplay aria-pressed="false" aria-label="Pausar rotación automática">
+        <i class="ph ph-pause" aria-hidden="true"></i>
+        <span>Pausar</span>
+      </button>
       <div class="service-stage__stamp" aria-hidden="true">
         <i class="ph ph-play" aria-hidden="true"></i>
         <span>Imagen<br />en movimiento</span>
       </div>
+      <div class="service-stage__progress" aria-hidden="true"><span></span></div>
     </div>
 
     <div class="service-list">
@@ -64,14 +75,52 @@ const services = [
 
       const triggers = Array.from(stage.querySelectorAll<HTMLButtonElement>("[data-service-trigger]"));
       const visuals = Array.from(stage.querySelectorAll<HTMLElement>("[data-service-visual]"));
+      const autoplayButton = stage.querySelector<HTMLButtonElement>("[data-service-autoplay]");
+      const progress = stage.querySelector<HTMLElement>(".service-stage__progress span");
+      const responsiveQuery = window.matchMedia("(max-width: 900px)");
+      const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const autoDelay = 4500;
+      let activeIndex = 0;
+      let timer: number | undefined;
+      let progressAnimation: Animation | undefined;
+      let isVisible = false;
+      let isPaused = false;
 
-      const activate = (index: number) => {
+      const canAutoplay = () => responsiveQuery.matches && !reduceMotionQuery.matches && isVisible && !isPaused && !document.hidden;
+
+      const stopAutoplay = () => {
+        if (timer) window.clearTimeout(timer);
+        timer = undefined;
+        progressAnimation?.cancel();
+        progressAnimation = undefined;
+      };
+
+      const scheduleAutoplay = () => {
+        stopAutoplay();
+        if (!canAutoplay()) return;
+
+        if (progress) {
+          progressAnimation = progress.animate(
+            [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
+            { duration: autoDelay, easing: "linear", fill: "forwards" },
+          );
+        }
+
+        timer = window.setTimeout(() => {
+          activate((activeIndex + 1) % triggers.length, false);
+          scheduleAutoplay();
+        }, autoDelay);
+      };
+
+      const activate = (index: number, restartTimer = true) => {
+        activeIndex = index;
         triggers.forEach((trigger, triggerIndex) => {
           const isActive = triggerIndex === index;
           trigger.classList.toggle("is-active", isActive);
           trigger.setAttribute("aria-pressed", String(isActive));
         });
         visuals.forEach((visual, visualIndex) => visual.classList.toggle("is-active", visualIndex === index));
+        if (restartTimer) scheduleAutoplay();
       };
 
       triggers.forEach((trigger, index) => {
@@ -79,6 +128,28 @@ const services = [
         trigger.addEventListener("focus", () => activate(index));
         trigger.addEventListener("click", () => activate(index));
       });
+
+      autoplayButton?.addEventListener("click", () => {
+        isPaused = !isPaused;
+        autoplayButton.setAttribute("aria-pressed", String(isPaused));
+        autoplayButton.setAttribute("aria-label", isPaused ? "Reanudar rotación automática" : "Pausar rotación automática");
+        autoplayButton.querySelector("span")!.textContent = isPaused ? "Reanudar" : "Pausar";
+        autoplayButton.querySelector("i")!.className = `ph ${isPaused ? "ph-play" : "ph-pause"}`;
+        scheduleAutoplay();
+      });
+
+      const visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+          scheduleAutoplay();
+        },
+        { rootMargin: "-18% 0px -18% 0px" },
+      );
+
+      visibilityObserver.observe(stage);
+      responsiveQuery.addEventListener("change", scheduleAutoplay);
+      reduceMotionQuery.addEventListener("change", scheduleAutoplay);
+      document.addEventListener("visibilitychange", scheduleAutoplay);
     });
   };
 
@@ -160,10 +231,28 @@ const services = [
     line-height: 0.92;
   }
 
-  .service-visual figcaption span {
+  .service-visual__index {
     color: var(--color-gold-light);
     font-size: 1.3rem;
     letter-spacing: 0.14em;
+  }
+
+  .service-visual__copy {
+    display: grid;
+    text-align: right;
+  }
+
+  .service-visual__copy strong {
+    font: inherit;
+  }
+
+  .service-visual__copy small {
+    display: none;
+  }
+
+  .service-stage__autoplay,
+  .service-stage__progress {
+    display: none;
   }
 
   .service-stage__stamp {
@@ -316,25 +405,122 @@ const services = [
       grid-template-columns: 1fr;
     }
 
-    .service-stage__visuals { min-height: min(68rem, 70vh); }
+    .service-stage__visuals {
+      min-height: clamp(38rem, 58svh, 56rem);
+    }
+
+    .service-visual figcaption {
+      right: clamp(2rem, 5vw, 3.2rem);
+      bottom: clamp(2.6rem, 6vw, 4rem);
+      left: clamp(2rem, 5vw, 3.2rem);
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .service-visual__copy {
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .service-visual__copy strong {
+      font-size: clamp(4rem, 9vw, 7rem);
+    }
+
+    .service-visual__copy small {
+      display: block;
+      max-width: 38ch;
+      color: var(--color-text-soft);
+      font-family: var(--font-body);
+      font-size: clamp(1.4rem, 2.2vw, 1.7rem);
+      font-weight: 480;
+      letter-spacing: 0;
+      line-height: 1.45;
+    }
+
+    .service-stage__autoplay {
+      position: absolute;
+      z-index: 4;
+      top: 2rem;
+      left: 2rem;
+      display: inline-flex;
+      min-height: 4.4rem;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      border-radius: 999px;
+      background: rgba(14, 11, 2, 0.72);
+      color: var(--color-text);
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(1rem);
+    }
+
+    .service-stage__autoplay:active { transform: scale(0.97); }
+
+    .service-stage__progress {
+      position: absolute;
+      z-index: 4;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      height: 0.4rem;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .service-stage__progress span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-row {
+      min-height: 9.6rem;
+      grid-template-columns: 2.8rem 1fr 2.8rem;
+      gap: 1rem;
+      padding: 1.8rem 1.4rem;
+    }
+
+    .service-row:nth-child(odd) { border-right: 1px solid var(--color-line); }
+    .service-row__icon { display: none; }
+    .service-row__copy > span { display: none; }
+    .service-row__copy strong { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+
+    .service-list__footer {
+      grid-column: 1 / -1;
+    }
   }
 
   @media (max-width: 600px) {
-    .service-stage__visuals { min-height: 48rem; }
+    .service-stage__visuals { min-height: clamp(36rem, 56svh, 48rem); }
     .service-stage__stamp { width: 9rem; height: 9rem; font-size: 0.9rem; }
 
+    .service-list { grid-template-columns: 1fr; }
+
     .service-row {
-      min-height: 13rem;
-      grid-template-columns: 3rem 1fr 3rem;
+      min-height: 7.4rem;
     }
 
-    .service-row__icon { display: none; }
-    .service-row__copy > span { font-size: 1.3rem; }
+    .service-row:nth-child(odd) { border-right: 0; }
+
     .service-list__footer { align-items: flex-start; flex-direction: column; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .service-stage__stamp { animation: none; }
+    .service-stage__autoplay,
+    .service-stage__progress { display: none; }
     .service-visual,
     .service-row::before,
     .service-row__copy > span,

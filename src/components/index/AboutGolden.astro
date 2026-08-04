@@ -13,7 +13,7 @@
   </div>
 
   <div class="manifesto__body shell">
-    <video class="manifesto__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+    <video class="manifesto__video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
       <source src="/videos/GoldenBackgroundSlow.webm" type="video/webm" />
     </video>
     <div class="manifesto__veil" aria-hidden="true"></div>
@@ -33,6 +33,55 @@
     </div>
   </div>
 </section>
+
+<script>
+  const initManifestoVideo = () => {
+    const videos = document.querySelectorAll<HTMLVideoElement>(".manifesto__video");
+
+    videos.forEach((video) => {
+      if (video.dataset.playbackReady === "true") return;
+      video.dataset.playbackReady = "true";
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+
+      let isVisible = false;
+
+      const play = () => {
+        if (!isVisible || document.hidden) return;
+        void video.play().catch(() => {
+          // Muted autoplay can still be deferred by browser power-saving modes.
+        });
+      };
+
+      const restart = () => {
+        video.currentTime = 0;
+        play();
+      };
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) play();
+        },
+        { threshold: 0.08 },
+      );
+
+      observer.observe(video);
+      video.addEventListener("canplay", play);
+      video.addEventListener("ended", restart);
+      document.addEventListener("visibilitychange", play);
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initManifestoVideo, { once: true });
+  } else {
+    initManifestoVideo();
+  }
+
+  document.addEventListener("astro:page-load", initManifestoVideo);
+</script>
 
 <style>
   .manifesto {
